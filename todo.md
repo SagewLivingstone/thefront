@@ -1,7 +1,6 @@
 
 # To-do
 
-- Make an image page
 - Create day model that holds multiple images
 - Create function that goes back and loads metadata for objects that don't have it
 
