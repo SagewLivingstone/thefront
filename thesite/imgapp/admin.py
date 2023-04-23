@@ -11,6 +11,7 @@ class ImageAdmin(admin.ModelAdmin):
     readonly_fields = [
         'created_at',
         'updated_at',
+        'uuid',
         'image_normal',
         'image_small',
         'image_thumbnail'

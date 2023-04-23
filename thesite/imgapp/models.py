@@ -22,7 +22,7 @@ class Image(models.Model):
     image_small =       models.ImageField(upload_to="image", null=True, editable=False)
     # thumbnail resized image
     image_thumbnail =   models.ImageField(upload_to="image", null=True, editable=False)
-    uuid =              models.CharField(max_length=36, default=uuid.uuid4(), null=False, editable=False)
+    uuid =              models.CharField(max_length=36, default=uuid.uuid4, null=False, editable=False)
     caption =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
@@ -142,3 +142,8 @@ class ImageMetadata(models.Model):
 
     def __str__(self) -> str:
         return f'EXIF: [{self.image.caption}]'
+
+class DayPage(models.Model):
+
+    def __str__(self) -> str:
+        return "day"
