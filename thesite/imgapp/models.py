@@ -44,7 +44,7 @@ class Image(models.Model):
     
     def make_resizes(self):
         image = PIL.Image.open(self.image)
-        image.thumbnail((1920, 1080), PIL.Image.ANTIALIAS)
+        image.thumbnail((3840, 2160), PIL.Image.ANTIALIAS)
         
         thumb_name, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
