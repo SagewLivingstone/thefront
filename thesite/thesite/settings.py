@@ -26,7 +26,7 @@ config.read(secrets_path)
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rfezn8ev05qu^ppbtsq2jm3841bhmtghdyr((xo@i8ghu8l7t@'
+SECRET_KEY = config.get('django', 'secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.getboolean('django', 'debug')
