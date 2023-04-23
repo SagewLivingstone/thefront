@@ -1,8 +1,12 @@
 from django.contrib import admin
 
-from .models import Image
+from .models import Image, ImageMetadata
 
+class ImageMetadataAdmin(admin.StackedInline):
+    model = ImageMetadata
+    readonly_fields = ['image']
+
+@admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ['created_at', 'updated_at']
-
-admin.site.register(Image, ImageAdmin)
+    inlines = [ImageMetadataAdmin]
