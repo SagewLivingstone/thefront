@@ -1,10 +1,11 @@
+import os
+import uuid
+import PIL.Image
 from datetime import datetime
+from io import BytesIO
 
 from django.db import models
 from django.core.files.base import ContentFile
-import PIL.Image
-from io import BytesIO
-import os
 
 from .imgmeta import GetExif
 
@@ -13,12 +14,15 @@ class Image(models.Model):
     """
     Contains a single image
     """
-    # Full-size image
+    # 4k max image
     image =             models.ImageField(upload_to="image")
-    # 1440p resized image
-    image_normal =      models.ImageField(upload_to="image_normal", null=True, editable=False)
+    # 1080p resized image
+    image_normal =      models.ImageField(upload_to="image", null=True, editable=False)
     # small resized image
-    image_thumbnail =   models.ImageField(upload_to="image_thumbnail", null=True, editable=False)
+    image_small =       models.ImageField(upload_to="image", null=True, editable=False)
+    # thumbnail resized image
+    image_thumbnail =   models.ImageField(upload_to="image", null=True, editable=False)
+    uuid =              models.CharField(max_length=36, default=uuid.uuid4(), null=False, editable=False)
     caption =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
@@ -41,15 +45,18 @@ class Image(models.Model):
             self.metadata = ImageMetadata(image=self)
         self.metadata.fill(self.exifdata)
         self.metadata.save()
-    
-    def make_resizes(self):
-        image = PIL.Image.open(self.image)
-        image.thumbnail((3840, 2160), PIL.Image.ANTIALIAS)
+
+    def save_resized(self, field, size):
+        """
+        make a resize of <size> and save it in self.<field>
+        """
+        pil_image = PIL.Image.open(self.image)
+        pil_image.thumbnail(size, PIL.Image.ANTIALIAS)
         
-        thumb_name, thumb_extension = os.path.splitext(self.image.name)
+        _, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
 
-        thumb_filename = thumb_name + '_normal' + thumb_extension
+        thumb_filename = self.uuid + '_' + str(size[1]) + thumb_extension
 
         if thumb_extension in ['.jpeg', '.jpg']:
             FTYPE = 'JPEG'
@@ -62,22 +69,38 @@ class Image(models.Model):
         
         # Save thumbnail to memory
         temp_thumb = BytesIO()
-        image.save(temp_thumb, FTYPE)
+        pil_image.save(temp_thumb, FTYPE)
         temp_thumb.seek(0)
         
         # set save=False to avoid an infinite loop
-        self.image_normal.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        getattr(self, field).save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
         temp_thumb.close()
 
         return True
+    
+    def make_resizes(self):
+        """
+        resize the image to different sizes
+        """
+        resizes = [
+            ('image_normal', (1920, 1080)),
+            ('image_small', (1280, 720)),
+            ('image_thumbnail', (640, 360)),
+            ('image', (3840, 2160)),  # Finally, resize the image itself to 4k
+        ]
 
+        for (field, size) in resizes:
+            if not self.save_resized(field, size):
+                print(f'Failed to resize to {size} for: {self}')
 
     def save(self, *args, **kwargs):
+        if not self.uuid:
+            self.uuid = uuid.uuid4()
         # Check if we have a new file to process
         if not self.image.closed:
             self.load_metadata_dict()
             self.make_resizes()
-        super(Image, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         if not self.image.closed:
             self.update_metadata()
 
