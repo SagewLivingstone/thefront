@@ -56,7 +56,7 @@ class Image(models.Model):
         _, thumb_extension = os.path.splitext(self.image.name)
         thumb_extension = thumb_extension.lower()
 
-        thumb_filename = self.uuid + '_' + str(size[1]) + thumb_extension
+        thumb_filename = str(self.uuid) + '_' + str(size[1]) + thumb_extension
 
         if thumb_extension in ['.jpeg', '.jpg']:
             FTYPE = 'JPEG'
@@ -94,14 +94,17 @@ class Image(models.Model):
                 print(f'Failed to resize to {size} for: {self}')
 
     def save(self, *args, **kwargs):
-        if not self.uuid:
+        image_changed = not self.image.closed
+
+        if not self.uuid: # In case the uuid doens't get set
             self.uuid = uuid.uuid4()
+
         # Check if we have a new file to process
-        if not self.image.closed:
+        if image_changed:
             self.load_metadata_dict()
             self.make_resizes()
         super().save(*args, **kwargs)
-        if not self.image.closed:
+        if image_changed:
             self.update_metadata()
 
     def __str__(self) -> str:
@@ -112,12 +115,12 @@ class ImageMetadata(models.Model):
     Metadata for a single image
     """
     capture_date =  models.DateTimeField()
-    camera =        models.CharField(max_length=80)
-    lens =          models.CharField(max_length=80)
-    focallength =   models.CharField(max_length=10)
-    fnumber =       models.CharField(max_length=10)
-    shutterspeed =  models.CharField(max_length=10)
-    iso =           models.CharField(max_length=10)
+    camera =        models.CharField(max_length=80, null=True, blank=True)
+    lens =          models.CharField(max_length=80, null=True, blank=True)
+    focallength =   models.CharField(max_length=10, null=True, blank=True)
+    fnumber =       models.CharField(max_length=10, null=True, blank=True)
+    shutterspeed =  models.CharField(max_length=10, null=True, blank=True)
+    iso =           models.CharField(max_length=10, null=True, blank=True)
     
     image = models.OneToOneField(
         Image,
@@ -130,12 +133,12 @@ class ImageMetadata(models.Model):
         datestring = exifdict.get('DateTimeOriginal')
         formatstring = '%Y:%m:%d %H:%M:%S'
         self.capture_date = datetime.strptime(datestring, formatstring)
-        self.camera = exifdict.get('Model')
-        self.lens = exifdict.get('LensModel')
-        self.focallength = exifdict.get('FocalLength')
-        self.fnumber = exifdict.get('FNumber')
-        self.shutterspeed = exifdict.get('ExposureTime')
-        self.iso = exifdict.get('ISOSpeedRatings')
+        self.camera = exifdict.get('Model') or self.camera
+        self.lens = exifdict.get('LensModel') or self.lens
+        self.focallength = exifdict.get('FocalLength') or self.focallength
+        self.fnumber = exifdict.get('FNumber') or self.fnumber
+        self.shutterspeed = exifdict.get('ExposureTime') or self.shutterspeed
+        self.iso = exifdict.get('ISOSpeedRatings') or self.iso
 
     def __str__(self) -> str:
         return f'EXIF: [{self.image.caption}]'

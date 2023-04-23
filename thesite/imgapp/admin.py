@@ -8,5 +8,11 @@ class ImageMetadataAdmin(admin.StackedInline):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = [
+        'created_at',
+        'updated_at',
+        'image_normal',
+        'image_small',
+        'image_thumbnail'
+    ]
     inlines = [ImageMetadataAdmin]
