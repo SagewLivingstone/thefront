@@ -108,7 +108,7 @@ class Image(models.Model):
             self.update_metadata()
 
     def __str__(self) -> str:
-        return self.caption
+        return datetime.strftime(self.metadata.capture_date, '%m/%d/%y') + ': ' + self.caption
 
 class ImageMetadata(models.Model):
     """
