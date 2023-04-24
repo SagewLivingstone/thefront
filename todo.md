@@ -2,7 +2,6 @@
 # To-do
 
 - Re-style caption
-- Store original filename for reference
 - Implement months view
 - Deploy!!
 - Implement private photos

@@ -12,6 +12,7 @@ class ImageAdmin(admin.ModelAdmin):
         'created_at',
         'updated_at',
         'uuid',
+        'original_filename',
         'day',
         'image_normal',
         'image_small',

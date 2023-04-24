@@ -45,6 +45,7 @@ class Image(models.Model):
     # thumbnail resized image
     image_thumbnail =   models.ImageField(upload_to="image", null=True, editable=False)
     uuid =              models.CharField(max_length=36, default=uuid.uuid4, null=False, editable=False)
+    original_filename = models.CharField(max_length=50, null=True, editable=False)
     caption =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
@@ -133,6 +134,7 @@ class Image(models.Model):
         # Check if we have a new file to process
         if image_changed:
             self.load_metadata_dict()
+            self.original_filename = self.image.name
             self.make_resizes()
         super().save(*args, **kwargs)
         if image_changed:
@@ -141,7 +143,7 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return (datetime.strftime(self.metadata.capture_date, '%m/%d/%y') if self.metadata.capture_date else 'DATEERROR') + ': ' + self.caption
+        return (datetime.strftime(self.day.day, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.caption
 
 class ImageMetadata(models.Model):
     """
