@@ -37,6 +37,7 @@
                     position: absolute;
                     right: 5%;
                     bottom: 5%;
+                    text-align: right;
                 }
 
             .image-block-tall {
@@ -78,7 +79,7 @@
                                 <img src="{{ image.image.url }}"
                                     alt="Image: [{{image}}]"
                                     style="max-width: 100%;"/>
-                                <p class="image-caption">{{image}}</p>
+                                <p class="image-caption">{{image|linebreaksbr}}</p>
                             </div>
                         </div>
                     {% else %}
@@ -88,13 +89,13 @@
                             <div class="image-caption-block-left">
                                 <img src="{{ image.image_normal.url }}"
                                     alt="Image: [{{image}}]"/>
-                                <p class="image-tall-caption">{{image}}</p>
+                                <p class="image-tall-caption">{{image|linebreaksbr}}</p>
                             </div>
                             {% else %}
                             <div class="image-caption-block-right">
                                 <p class="image-tall-caption">{{image}}</p>
                                 <img src="{{ image.image_normal.url }}"
-                                    alt="Image: [{{image}}]"/>
+                                    alt="Image: [{{image|linebreaksbr}}]"/>
                             </div>
                             {% endif %}
                         </div>

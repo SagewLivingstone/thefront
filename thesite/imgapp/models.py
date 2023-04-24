@@ -152,7 +152,7 @@ class ImageMetadata(models.Model):
     lens =          models.CharField(max_length=80, null=True, blank=True)
     focallength =   models.CharField(max_length=10, null=True, blank=True)
     fnumber =       models.CharField(max_length=10, null=True, blank=True)
-    shutterspeed =  models.CharField(max_length=10, null=True, blank=True)
+    shutterspeed =  models.CharField(max_length=20, null=True, blank=True)
     iso =           models.CharField(max_length=10, null=True, blank=True)
     location =      models.CharField(max_length=30, null=True, blank=True)
     

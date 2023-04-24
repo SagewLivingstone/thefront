@@ -1,12 +1,12 @@
 
 # To-do
 
-- Figure out why newlines don't appear in caption
 - Re-style caption
 - Store original filename for reference
 - Implement months view
-- Remove that black line between photos
+- Deploy!!
 - Implement private photos
+- Make the site not look like trash on mobile
 
 ### Longer-term
 - Implement albums
