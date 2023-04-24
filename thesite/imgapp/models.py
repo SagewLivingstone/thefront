@@ -1,14 +1,36 @@
 import os
 import uuid
 import PIL.Image
-from datetime import datetime
+from datetime import datetime, date
 from io import BytesIO
 
 from django.db import models
 from django.core.files.base import ContentFile
+from django.utils import timezone
 
 from .imgmeta import GetExif
 
+
+class DayPage(models.Model):
+    day = models.DateField()
+    caption = models.TextField()
+
+    def get_next_day(self):
+        next = DayPage.objects.filter(
+            day__gt=self.day
+        ).order_by('day') .first()
+        if next:
+            return next.day
+
+    def get_prev_day(self):
+        prev = DayPage.objects.filter(
+            day__lt=self.day
+        ).order_by('day') .last()
+        if prev:
+            return prev.day
+
+    def __str__(self) -> str:
+        return "Day: " + str(self.day)
 
 class Image(models.Model):
     """
@@ -26,6 +48,8 @@ class Image(models.Model):
     caption =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
+
+    day =               models.ForeignKey(DayPage, on_delete=models.PROTECT, null=True, blank=True, editable=False)
 
     exifdata = None
 
@@ -93,6 +117,13 @@ class Image(models.Model):
             if not self.save_resized(field, size):
                 print(f'Failed to resize to {size} for: {self}')
 
+    def update_day(self):
+        if not self.metadata.capture_date: return
+        (day, created) = DayPage.objects.get_or_create(day=self.metadata.capture_date)
+        self.day = day
+
+        return created
+
     def save(self, *args, **kwargs):
         image_changed = not self.image.closed
 
@@ -106,21 +137,24 @@ class Image(models.Model):
         super().save(*args, **kwargs)
         if image_changed:
             self.update_metadata()
+        self.update_day()
+        super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return datetime.strftime(self.metadata.capture_date, '%m/%d/%y') + ': ' + self.caption
+        return (datetime.strftime(self.metadata.capture_date, '%m/%d/%y') if self.metadata.capture_date else 'DATEERROR') + ': ' + self.caption
 
 class ImageMetadata(models.Model):
     """
     Metadata for a single image
     """
-    capture_date =  models.DateTimeField()
+    capture_date =  models.DateTimeField(null=True, blank=True)
     camera =        models.CharField(max_length=80, null=True, blank=True)
     lens =          models.CharField(max_length=80, null=True, blank=True)
     focallength =   models.CharField(max_length=10, null=True, blank=True)
     fnumber =       models.CharField(max_length=10, null=True, blank=True)
     shutterspeed =  models.CharField(max_length=10, null=True, blank=True)
     iso =           models.CharField(max_length=10, null=True, blank=True)
+    location =      models.CharField(max_length=30, null=True, blank=True)
     
     image = models.OneToOneField(
         Image,
@@ -142,8 +176,3 @@ class ImageMetadata(models.Model):
 
     def __str__(self) -> str:
         return f'EXIF: [{self.image.caption}]'
-
-class DayPage(models.Model):
-
-    def __str__(self) -> str:
-        return "day"

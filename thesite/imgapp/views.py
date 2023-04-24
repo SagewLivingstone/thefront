@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import datetime
 
-from .models import Image
+from .models import Image, DayPage
 
 def index(request):
     return HttpResponse("Image lib index")
@@ -19,13 +19,33 @@ def image(request, image_id):
 
 def day(request, year, month, day):
     date = datetime.date(year, month, day)
-    image_set = Image.objects.filter(
-        metadata__capture_date__year=year,
-        # metadata__capture_date__month=month,
-        # metadata__capture_date__year=day
-    )
+    daypage = get_object_or_404(DayPage, day=date)
+
+    image_set = daypage.image_set.all()
+    counter = day+month+year # Flip left-right every day, adding so no repeat eg. Feb 29 (leap) -> Mar 1
     for image in image_set:
         image.aspect_ratio = image.image.width / image.image.height
-    context = { 'images': image_set,
-                'date': date }
+        image.wide = image.aspect_ratio > 1.4
+        if not image.wide:
+            image.left = counter % 2
+            counter = counter + 1
+
+    prev = daypage.get_prev_day()
+    next = daypage.get_next_day()
+    if prev:
+        prev_url = f'/day/{prev.year}/{prev.month}/{prev.day}/'
+    else:
+        prev_url = '/imglist/'
+    if next:
+        next_url = f'/day/{next.year}/{next.month}/{next.day}/'
+    else:
+        next_url = '/imglist/'
+
+    context = {
+        'images': image_set,
+        'date': date,
+        'prev_url': prev_url,
+        'next_url': next_url
+    }
+
     return render(request, 'imgapp/day.html', context)
