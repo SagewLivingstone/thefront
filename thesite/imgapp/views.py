@@ -49,3 +49,19 @@ def day(request, year, month, day):
     }
 
     return render(request, 'imgapp/day.html', context)
+
+def month(request, year, month):
+    days_set = DayPage.objects.filter(day__year=year, day__month=month).order_by('day')
+
+    # Build head image set
+    for day in days_set:
+        day.top_image = day.image_set.first()
+    
+    has_days = len(days_set) > 0
+
+    context = {
+        'days_set': days_set,
+        'fill_days': range(days_set.first().day.weekday()) if has_days else 0, # Days from the previous month to fill
+        'days_range': range(days_set.last().day.day) if has_days else 0
+    }
+    return render(request, 'imgapp/month.html', context)

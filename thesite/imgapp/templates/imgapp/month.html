@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 8px;
+            max-width: 80%;
+            margin: auto;
+        }
+
+            .square-tile {
+                padding-top: 100%;
+                box-sizing: border-box;
+                position: relative;
+            }
+
+                .day-tile {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                }
+                
+                    .day-tile h2.day-title {
+                        position: absolute;
+                        color: white;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -100%);
+
+                        font-size: 130%;
+                        white-space: nowrap;
+                    }
+
+                    .day-tile .image-block {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+        </style>
+    </head>
+    <body>
+        {% if days_set %}
+            <div class="calendar-container">
+                {% for i in fill_days %}
+                    <div class="square-tile">
+                    </div>
+                {% endfor %}
+                {% for day in days_set %}
+                            <div class="square-tile">
+                                <a class="day-tile" href="/day/{{day.day.year}}/{{day.day.month}}/{{day.day.day}}/">
+                                    <h2 class="day-title">{{ day.day.day }}</h2>
+                                    <img class="image-block"
+                                    src="{{ day.top_image.image_thumbnail.url }}"
+                                    alt="">
+                                </a>
+                            </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No images found for this month.</p>
+        {% endif %}
+    </body>
+</html>
