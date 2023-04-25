@@ -49,6 +49,8 @@ class Image(models.Model):
     caption =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
+    width =             models.IntegerField(null=True, editable=False)
+    height =            models.IntegerField(null=True, editable=False)
 
     day =               models.ForeignKey(DayPage, on_delete=models.PROTECT, null=True, blank=True, editable=False)
 
@@ -125,6 +127,22 @@ class Image(models.Model):
 
         return created
 
+    def update_dimensions(self):
+        self.width = self.image.width
+        self.height = self.image.height
+    
+    def update_dimensions_all():
+        all = Image.objects.all()
+        
+        for i, image in enumerate(all):
+            print(image, f'[{i}/{len(all)}]')
+            try:
+                image.update_dimensions()
+                image.save()
+            except Exception as e:
+                print(f"ERROR: {image} -", e)
+
+
     def save(self, *args, **kwargs):
         image_changed = not self.image.closed
 
@@ -139,6 +157,7 @@ class Image(models.Model):
         super().save(*args, **kwargs)
         if image_changed:
             self.update_metadata()
+            self.update_dimensions()
         self.update_day()
         super().save(*args, **kwargs)
 

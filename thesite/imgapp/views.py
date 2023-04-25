@@ -25,7 +25,7 @@ def day(request, year, month, day):
     image_set = daypage.image_set.all()
     counter = day+month+year # Flip left-right every day, adding so no repeat eg. Feb 29 (leap) -> Mar 1
     for image in image_set:
-        image.aspect_ratio = image.image.width / image.image.height
+        image.aspect_ratio = image.width / image.height
         image.wide = image.aspect_ratio > 1.4
         if not image.wide:
             image.left = counter % 2

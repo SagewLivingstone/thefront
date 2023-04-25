@@ -16,6 +16,8 @@ class ImageAdmin(admin.ModelAdmin):
         'day',
         'image_normal',
         'image_small',
-        'image_thumbnail'
+        'image_thumbnail',
+        'width',
+        'height'
     ]
     inlines = [ImageMetadataAdmin]
