@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .title {
+            margin: 1.5em 5%;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+            .title h1 {
+            }
+
+            .title a {
+                text-decoration: none;
+                color: black
+            }
+        
+
         .calendar-container {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -48,21 +63,35 @@
         </style>
     </head>
     <body>
+        <div class="title">
+            <a href="/month/{{year}}/{{last_month}}/">&lt;</a>
+            <span>{{ month_name }} {{ year }}</span>
+            <a href="/month/{{year}}/{{next_month}}/">&gt;</a>
+        </div>
         {% if days_set %}
             <div class="calendar-container">
+                {% comment %} Blank days at the beginning {% endcomment %}
                 {% for i in fill_days %}
                     <div class="square-tile">
                     </div>
                 {% endfor %}
                 {% for day in days_set %}
-                            <div class="square-tile">
-                                <a class="day-tile" href="/day/{{day.day.year}}/{{day.day.month}}/{{day.day.day}}/">
-                                    <h2 class="day-title">{{ day.day.day }}</h2>
-                                    <img class="image-block"
-                                    src="{{ day.top_image.image_thumbnail.url }}"
-                                    alt="">
-                                </a>
-                            </div>
+                    {% comment %} Actual day {% endcomment %}
+                    {% if day %}
+                        <div class="square-tile">
+                            <a class="day-tile" href="/day/{{day.day.year}}/{{day.day.month}}/{{day.day.day}}/">
+                                <h2 class="day-title">{{ day.day.day }}</h2>
+                                <img class="image-block"
+                                src="{{ day.top_image.image_thumbnail.url }}"
+                                alt="">
+                            </a>
+                        </div>
+                    {% else %}
+                    {% comment %} Blank day {% endcomment %}
+                        <div class="square-tile" style="background-color: #eee;">
+                        </div>
+                    {% endif %}
+
                 {% endfor %}
             </div>
         {% else %}

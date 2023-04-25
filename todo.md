@@ -2,7 +2,8 @@
 # To-do
 
 - Re-style caption
-- Implement months view
+- Refactor day.day -> day.date
+- Implement home view
 - Deploy!!
 - Implement private photos
 - Make the site not look like trash on mobile
