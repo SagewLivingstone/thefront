@@ -21,6 +21,11 @@
                     color: white;
                 }
 
+                .controls > a:hover {
+                    {% comment %} text-decoration: overline; {% endcomment %}
+                    {% comment %} Not sure about this {% endcomment %}
+                }
+
             {% comment %} Wide image {% endcomment %}
             .image-block {
                 min-height: 100vh;
@@ -43,7 +48,7 @@
 
             {% comment %} Tall image {% endcomment %}
             .image-block-tall {
-                min-height: 100vh;
+                min-height: 110vh;
                 background-color: white;
                 display: flex;
                 align-items: center;
@@ -77,6 +82,7 @@
     <body style="margin: 0;">
         <div class="controls">
             <a href="{{prev_url}}">&lt; prev</a>
+            <a href="{{month_url}}">^</a>
             <a href="{{next_url}}">next &gt;</a>
         </div>
         <div>

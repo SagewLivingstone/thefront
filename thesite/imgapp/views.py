@@ -31,6 +31,7 @@ def day(request, year, month, day):
             image.left = counter % 2
             counter = counter + 1
 
+    # Build page links
     prev = daypage.get_prev_day()
     next = daypage.get_next_day()
     if prev:
@@ -41,12 +42,15 @@ def day(request, year, month, day):
         next_url = f'/day/{next.year}/{next.month}/{next.day}/'
     else:
         next_url = '/imglist/'
+    month_url = f'/month/{year}/{month}/'
 
     context = {
         'images': image_set,
         'date': date,
+        'date_str': datetime.date.strftime(date, '%m/%d/%y'),
         'prev_url': prev_url,
-        'next_url': next_url
+        'next_url': next_url,
+        'month_url': month_url
     }
 
     return render(request, 'imgapp/day.html', context)
@@ -73,7 +77,7 @@ def month(request, year, month):
         'days_range': range(days_set.last().day.day) if has_days else 0,
         'month_name': calendar.month_name[month],
         'year': str(year),
-        'last_month': month-1,
-        'next_month': month+1
+        'last_month': (month-2) % 12 + 1, # Need to handle next/prev year, lol
+        'next_month': (month % 12) + 1
     }
     return render(request, 'imgapp/month.html', context)
