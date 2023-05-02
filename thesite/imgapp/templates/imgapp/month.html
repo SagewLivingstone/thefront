@@ -6,18 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ month_name }} {{ year }}</title>
     <style>
+        {% if dark %}
+        body {
+            background-color: #1d1d1d;
+            color: #d4d4d4;
+        }
+        {% endif %}
+
         .title {
             margin: 1.5em 5%;
             font-size: 2em;
             font-weight: bold;
         }
 
-            .title h1 {
-            }
-
-            .title a {
+            .title, .title a {
                 text-decoration: none;
-                color: black
+                color: {% if dark %}#d4d4d4{% else %}black{% endif %}
             }
         
 
@@ -27,6 +31,7 @@
             grid-gap: 8px;
             max-width: 80%;
             margin: auto;
+            margin-bottom: 80px;
         }
 
             .square-tile {
@@ -34,6 +39,10 @@
                 box-sizing: border-box;
                 position: relative;
             }
+
+                .empty-square {
+                    background-color: {% if dark %}#2b2b2b{% else %}#eee{% endif %}
+                }
 
                 .day-tile {
                     position: absolute;
@@ -88,7 +97,7 @@
                         </div>
                     {% else %}
                     {% comment %} Blank day {% endcomment %}
-                        <div class="square-tile" style="background-color: #eee;">
+                        <div class="square-tile empty-square">
                         </div>
                     {% endif %}
 

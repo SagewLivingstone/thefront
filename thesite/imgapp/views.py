@@ -5,6 +5,13 @@ import calendar
 
 from .models import Image, DayPage
 
+def dark_mode(request):
+    """
+    Return bool -> if the page should display dark mode
+    """
+
+    return False
+
 def index(request):
     return HttpResponse("Image lib index")
 
@@ -45,6 +52,7 @@ def date(request, year, month, day):
     month_url = f'/month/{year}/{month}/'
 
     context = {
+        'dark': dark_mode(request),
         'images': image_set,
         'date': date,
         'date_str': datetime.date.strftime(date, '%m/%d/%y'),
@@ -72,6 +80,7 @@ def month(request, year, month):
                 days_list.append(None)
 
     context = {
+        'dark': dark_mode(request),
         'days_set': days_list,
         'fill_days': range(days_set.first().date.weekday()) if has_days else 0, # Days from the previous month to fill
         'days_range': range(days_set.last().date.day) if has_days else 0,

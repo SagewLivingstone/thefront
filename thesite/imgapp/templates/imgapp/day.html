@@ -29,7 +29,7 @@
             {% comment %} Wide image {% endcomment %}
             .image-block {
                 min-height: 100vh;
-                background-color: black;
+                background-color: {% if dark %}#1d1d1d{% else %}black{% endif %};
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -49,13 +49,19 @@
             {% comment %} Tall image {% endcomment %}
             .image-block-tall {
                 min-height: 100vh;
-                background-color: white;
+                background-color: {% if dark %}#1d1d1d{% else %}white{% endif %};
+                color: {% if dark %}#d4d4d4{% else %}black{% endif %};
                 display: flex;
                 align-items: center;
             }
 
                 .image-block-tall img {
                     max-height: 80vh;
+                    {% if dark %}padding: 3px; background-color: #2b2b2b{% endif %}
+                }
+
+                .image-tall-caption {
+                    margin: 10px 18px;
                 }
 
                 .image-caption-block-left {
@@ -63,9 +69,6 @@
                     display: flex;
                     align-items: end;
                 }
-                    .image-caption-block-left img {
-                        padding-right: 3%;
-                    }
 
                 .image-caption-block-right {
                     padding-right: 10%;
@@ -73,10 +76,6 @@
                     align-items: end;
                     text-align: right;
                 }
-
-                    .image-caption-block-right img {
-                        padding-left: 3%;
-                    }
         </style>
     </head>
     <body style="margin: 0;">
