@@ -1,8 +1,8 @@
 # To-do
 
-- Refactor day.day -> day.date
-- Implement year view
 - Re-style caption
+- Implement year view
+- Put a CDN in front of AWS, or switch to Wasabi
 - Dark mode:
   - Toggle option, or something per-page/image?
     - Background: #1d1d1d

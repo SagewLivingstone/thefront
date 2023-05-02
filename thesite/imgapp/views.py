@@ -18,9 +18,9 @@ def image(request, image_id):
     context = { 'image': image }
     return render(request, 'imgapp/image.html', context)
 
-def day(request, year, month, day):
+def date(request, year, month, day):
     date = datetime.date(year, month, day)
-    daypage = get_object_or_404(DayPage, day=date)
+    daypage = get_object_or_404(DayPage, date=date)
 
     image_set = daypage.image_set.all()
     counter = day+month+year # Flip left-right every day, adding so no repeat eg. Feb 29 (leap) -> Mar 1
@@ -56,15 +56,15 @@ def day(request, year, month, day):
     return render(request, 'imgapp/day.html', context)
 
 def month(request, year, month):
-    days_set = DayPage.objects.filter(day__year=year, day__month=month).order_by('day')
+    days_set = DayPage.objects.filter(date__year=year, date__month=month).order_by('date')
 
     has_days = len(days_set) > 0
 
     # Build a list of days, from 0 -> last day found in the month
     days_list = []
     if days_set.count():
-        for i in range(1, days_set.last().day.day+1):
-            day = days_set.filter(day__day=i).first()
+        for i in range(1, days_set.last().date.day+1):
+            day = days_set.filter(date__day=i).first()
             if (day):
                 day.top_image = day.image_set.first()
                 days_list.append(day)
@@ -73,8 +73,8 @@ def month(request, year, month):
 
     context = {
         'days_set': days_list,
-        'fill_days': range(days_set.first().day.weekday()) if has_days else 0, # Days from the previous month to fill
-        'days_range': range(days_set.last().day.day) if has_days else 0,
+        'fill_days': range(days_set.first().date.weekday()) if has_days else 0, # Days from the previous month to fill
+        'days_range': range(days_set.last().date.day) if has_days else 0,
         'month_name': calendar.month_name[month],
         'year': str(year),
         'last_month': (month-2) % 12 + 1, # Need to handle next/prev year, lol

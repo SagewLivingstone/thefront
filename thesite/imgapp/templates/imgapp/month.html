@@ -48,7 +48,7 @@
                         color: white;
                         top: 50%;
                         left: 50%;
-                        transform: translate(-50%, -100%);
+                        transform: translate(-50%, -112%);
 
                         font-size: 130%;
                         white-space: nowrap;
@@ -79,8 +79,8 @@
                     {% comment %} Actual day {% endcomment %}
                     {% if day %}
                         <div class="square-tile">
-                            <a class="day-tile" href="/day/{{day.day.year}}/{{day.day.month}}/{{day.day.day}}/">
-                                <h2 class="day-title">{{ day.day.day }}</h2>
+                            <a class="day-tile" href="/day/{{day.date.year}}/{{day.date.month}}/{{day.date.day}}/">
+                                <h2 class="day-title">{{ day.date.day }}</h2>
                                 <img class="image-block"
                                 src="{{ day.top_image.image_thumbnail.url }}"
                                 alt="">

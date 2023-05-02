@@ -12,25 +12,25 @@ from .imgmeta import GetExif
 
 
 class DayPage(models.Model):
-    day = models.DateField()
+    date = models.DateField()
     caption = models.TextField()
 
     def get_next_day(self):
         next = DayPage.objects.filter(
-            day__gt=self.day
-        ).order_by('day') .first()
+            date__gt=self.date
+        ).order_by('date') .first()
         if next:
-            return next.day
+            return next.date
 
     def get_prev_day(self):
         prev = DayPage.objects.filter(
-            day__lt=self.day
-        ).order_by('day') .last()
+            date__lt=self.date
+        ).order_by('date') .last()
         if prev:
-            return prev.day
+            return prev.date
 
     def __str__(self) -> str:
-        return "Day: " + str(self.day)
+        return "Day: " + str(self.date)
 
 class Image(models.Model):
     """
@@ -122,7 +122,7 @@ class Image(models.Model):
 
     def update_day(self):
         if not self.metadata.capture_date: return
-        (day, created) = DayPage.objects.get_or_create(day=self.metadata.capture_date)
+        (day, created) = DayPage.objects.get_or_create(date=self.metadata.capture_date)
         self.day = day
 
         return created
@@ -162,7 +162,7 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return (datetime.strftime(self.day.day, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.caption
+        return (datetime.strftime(self.day.date, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.caption
 
 class ImageMetadata(models.Model):
     """
