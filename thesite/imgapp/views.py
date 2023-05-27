@@ -63,10 +63,8 @@ def date(request, year, month, day):
 
     return render(request, 'imgapp/day.html', context)
 
-def month(request, year, month):
+def _get_days_list(year, month):
     days_set = DayPage.objects.filter(date__year=year, date__month=month).order_by('date')
-
-    has_days = len(days_set) > 0
 
     # Build a list of days, from 0 -> last day found in the month
     days_list = []
@@ -78,15 +76,40 @@ def month(request, year, month):
                 days_list.append(day)
             else:
                 days_list.append(None)
+    
+    return (
+        days_list,
+        days_set.first().date.weekday() if days_set.count() else 0
+    )
+
+def month(request, year, month):
+    days_list, fill_days = _get_days_list(year, month)
 
     context = {
         'dark': dark_mode(request),
         'days_set': days_list,
-        'fill_days': range(days_set.first().date.weekday()) if has_days else 0, # Days from the previous month to fill
-        'days_range': range(days_set.last().date.day) if has_days else 0,
+        'fill_days': range(fill_days),
         'month_name': calendar.month_name[month],
         'year': str(year),
         'last_month': (month-2) % 12 + 1, # Need to handle next/prev year, lol
         'next_month': (month % 12) + 1
     }
     return render(request, 'imgapp/month.html', context)
+
+def year(request, year):
+    
+    months = {}
+    for i in range(1, 13):
+        days_list, fill_days = _get_days_list(year, i)
+        months[i] = {
+            'days_set': days_list,
+            'fill_days': range(fill_days)
+        }
+
+    context = {
+        'dark': dark_mode(request),
+        'year': str(year),
+        'months': months,
+        # ...
+    }
+    return render(request, 'imgapp/year.html', context)

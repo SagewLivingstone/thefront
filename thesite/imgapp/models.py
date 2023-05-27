@@ -112,8 +112,8 @@ class Image(models.Model):
         resizes = [
             ('image_normal', (1920, 1080)),
             ('image_small', (1280, 720)),
-            ('image_thumbnail', (640, 360)),
-            ('image', (3840, 2160)),  # Finally, resize the image itself to 4k
+            ('image_thumbnail', (256, 256)),
+            ('image', (3840, 2160)),
         ]
 
         for (field, size) in resizes:

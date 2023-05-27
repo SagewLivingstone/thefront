@@ -24,14 +24,20 @@
                 color: {% if dark %}#d4d4d4{% else %}black{% endif %}
             }
         
+        .months-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: start;
+            gap: 10px;
+        }
 
         .calendar-container {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            grid-gap: 8px;
-            max-width: 80%;
-            margin: auto;
+            grid-gap: 0;
+            width: 100%;
             margin-bottom: 80px;
+            cursor: pointer;
         }
 
             .square-tile {
@@ -52,17 +58,6 @@
                     bottom: 0;
                 }
                 
-                    .day-tile h2.day-title {
-                        position: absolute;
-                        color: white;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -112%);
-
-                        font-size: 130%;
-                        white-space: nowrap;
-                    }
-
                     .day-tile .image-block {
                         width: 100%;
                         height: 100%;
@@ -74,39 +69,39 @@
     <body>
         <div class="title">
             <a href="/month/{{year}}/{{last_month}}/">&lt;</a>
-            <span>{{ month_name }} <a href="/year/{{year}}">
-                {{ year }}</a>
-            </span>
+            <span>{{ year }}</span>
             <a href="/month/{{year}}/{{next_month}}/">&gt;</a>
         </div>
-        {% if days_set %}
-            <div class="calendar-container">
-                {% comment %} Blank days at the beginning {% endcomment %}
-                {% for i in fill_days %}
-                    <div class="square-tile">
-                    </div>
-                {% endfor %}
-                {% for day in days_set %}
-                    {% comment %} Actual day {% endcomment %}
-                    {% if day %}
+        <div class="months-container">
+        {% if months %}
+            {% for month_num, month in months.items %}
+                <div class="calendar-container" onclick="window.location.assign('/month/{{year}}/{{month_num}}')">
+                    {% comment %} Blank days at the beginning {% endcomment %}
+                    {% for i in month.fill_days %}
                         <div class="square-tile">
-                            <a class="day-tile" href="/day/{{day.date.year}}/{{day.date.month}}/{{day.date.day}}/">
-                                <h2 class="day-title">{{ day.date.day }}</h2>
-                                <img class="image-block"
-                                src="{{ day.top_image.image_thumbnail.url }}"
-                                alt="">
-                            </a>
                         </div>
-                    {% else %}
-                    {% comment %} Blank day {% endcomment %}
-                        <div class="square-tile empty-square">
-                        </div>
-                    {% endif %}
-
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                    {% for day in month.days_set %}
+                        {% comment %} Actual day {% endcomment %}
+                        {% if day %}
+                            <div class="square-tile">
+                                <a class="day-tile">
+                                    <img class="image-block"
+                                    src="{{ day.top_image.image_thumbnail.url }}"
+                                    alt="">
+                                </a>
+                            </div>
+                        {% else %}
+                        {% comment %} Blank day {% endcomment %}
+                            <div class="square-tile empty-square">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
         {% else %}
-            <p>No images found for this month.</p>
+            <p>No images for this year</p>
         {% endif %}
+        </div>
     </body>
 </html>
