@@ -13,6 +13,10 @@
         }
         {% endif %}
 
+        .hovertext:hover {
+            color: #777 !important;
+        }
+
         .title {
             margin: 1.5em 5%;
             font-size: 2em;
@@ -26,10 +30,21 @@
         
         .months-container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             align-items: start;
-            gap: 10px;
+            gap: 3vw;
         }
+
+        .month-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .month-box:hover {
+                opacity: 0.8;
+                color: #444 !important;
+            }
 
         .calendar-container {
             display: grid;
@@ -37,7 +52,6 @@
             grid-gap: 0;
             width: 100%;
             margin-bottom: 80px;
-            cursor: pointer;
         }
 
             .square-tile {
@@ -68,14 +82,22 @@
     </head>
     <body>
         <div class="title">
-            <a href="/month/{{year}}/{{last_month}}/">&lt;</a>
+            <a href="/month/{{year}}/{{last_month}}/" class="hovertext">&lt;</a>
             <span>{{ year }}</span>
-            <a href="/month/{{year}}/{{next_month}}/">&gt;</a>
+            <a href="/month/{{year}}/{{next_month}}/" class="hovertext">&gt;</a>
         </div>
         <div class="months-container">
         {% if months %}
             {% for month_num, month in months.items %}
-                <div class="calendar-container" onclick="window.location.assign('/month/{{year}}/{{month_num}}')">
+            <div class="month-box"
+                {% if month.days_set.15 %}
+                    onclick="window.location.assign('/month/{{year}}/{{month_num}}')"
+                    style="cursor: pointer;">
+                    <h1>{{ month.name }} {{ year }}</h1>
+                {% else %}
+                >
+                {% endif %}
+                <div class="calendar-container">
                     {% comment %} Blank days at the beginning {% endcomment %}
                     {% for i in month.fill_days %}
                         <div class="square-tile">
@@ -98,6 +120,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+            </div>
             {% endfor %}
         {% else %}
             <p>No images for this year</p>

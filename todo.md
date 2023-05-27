@@ -1,6 +1,7 @@
 # To-do
 
 - Re-style caption
+  - Caption day, instead of each photo
 - Implement year view
 - Put a CDN in front of AWS, or switch to Wasabi
 - Implement home view (years)

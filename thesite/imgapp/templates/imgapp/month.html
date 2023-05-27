@@ -13,6 +13,10 @@
         }
         {% endif %}
 
+        .hovertext:hover {
+            color: #777 !important;
+        }
+
         .title {
             margin: 1.5em 5%;
             font-size: 2em;
@@ -73,11 +77,11 @@
     </head>
     <body>
         <div class="title">
-            <a href="/month/{{year}}/{{last_month}}/">&lt;</a>
-            <span>{{ month_name }} <a href="/year/{{year}}">
+            <a href="/month/{{year}}/{{last_month}}/" class="hovertext">&lt;</a>
+            <span>{{ month_name }} <a href="/year/{{year}}" class="hovertext">
                 {{ year }}</a>
             </span>
-            <a href="/month/{{year}}/{{next_month}}/">&gt;</a>
+            <a href="/month/{{year}}/{{next_month}}/" class="hovertext">&gt;</a>
         </div>
         {% if days_set %}
             <div class="calendar-container">

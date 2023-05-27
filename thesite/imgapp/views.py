@@ -103,7 +103,8 @@ def year(request, year):
         days_list, fill_days = _get_days_list(year, i)
         months[i] = {
             'days_set': days_list,
-            'fill_days': range(fill_days)
+            'fill_days': range(fill_days),
+            'name': calendar.month_name[i],
         }
 
     context = {
