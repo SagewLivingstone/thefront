@@ -1,8 +1,13 @@
 #!/bin/sh
 echo "START: Changes detected on master, redeploying..."
 . venv/bin/activate
-sudo git pull origin master
-sudo pip install -r requirements.txt
+
+sudo pkill -fe "^python -m gunicorn"
+sudo rm -v '/var/log/gunicorn/access.log'
+sudo rm -v '/var/log/gunicorn/error.log'
+
+git pull origin master
+pip install -r requirements.txt
 
 cd thesite/
 echo "Updating DB..."
@@ -11,7 +16,6 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 
 echo "Restarting Gunicorn server..."
-sudo pkill -fe "^python -m gunicorn"
 python -m gunicorn -c config/gunicorn/prod.py
 
 echo "Restarting Nginx..."
