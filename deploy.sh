@@ -11,7 +11,7 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 
 echo "Restarting Gunicorn server..."
-pkill "python -m gunicorn"
+pkill -fe "^python -m gunicorn"
 python -m gunicorn -c config/gunicorn/prod.py
 
 echo "Restarting Nginx..."
