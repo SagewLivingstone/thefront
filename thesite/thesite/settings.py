@@ -31,7 +31,7 @@ SECRET_KEY = config.get('django', 'secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.getboolean('django', 'debug')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.sagelivingst.one']
 
 # Application definition
 
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'thesite.urls'
@@ -123,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = '/var/www/thefront/static'
 
 USE_S3 = config.getboolean('aws', 'use_s3')
 
@@ -153,3 +155,16 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# HSTS Header
+SECURE_HSTS_SECONDS = 30 # TODO: Edit later once https ensured (to 2_592_000, 30 days)
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+CSP_IMG_SRC = ["'self'", "s3.us-west-2.amazonaws.com"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-inline'"]
+

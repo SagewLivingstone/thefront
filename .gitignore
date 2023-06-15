@@ -1,5 +1,6 @@
 front_env
 secrets.ini
+config
 *.pem
 
 # TEMPLATE:
