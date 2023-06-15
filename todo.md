@@ -1,15 +1,12 @@
 # To-do
 
+- Implement home view (years)
 - Implement year view
 - Re-style controls
 - Toggle-able dark mode
 - Re-style caption
   - Caption day, instead of each photo
-- Implement home view (years)
 - Put a CDN in front of AWS, or switch to Wasabi
-- Deploy!!
-  - Docker container first?
-- Implement private photos?
 - Make the site not look like trash on mobile
 
 ## Longer-term
