@@ -104,6 +104,7 @@ def year(request, year):
         months[i] = {
             'days_set': days_list,
             'fill_days': range(fill_days),
+            'has_days': any(_ is not None for _ in days_list),
             'name': calendar.month_name[i],
         }
 

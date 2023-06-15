@@ -31,7 +31,7 @@ SECRET_KEY = config.get('django', 'secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.getboolean('django', 'debug')
 
-ALLOWED_HOSTS = ['.sagelivingst.one']
+ALLOWED_HOSTS = ['.sagelivingst.one', '127.0.0.1']
 
 # Application definition
 
@@ -124,7 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = '/var/www/thefront/static'
+
+if not DEBUG:
+    STATIC_ROOT = config.get('static', 'static-root')
 
 USE_S3 = config.getboolean('aws', 'use_s3')
 

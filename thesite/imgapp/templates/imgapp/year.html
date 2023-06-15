@@ -89,7 +89,7 @@
         {% if months %}
             {% for month_num, month in months.items %}
             <div class="month-box"
-                {% if month.days_set.15 %}
+                {% if month.has_days %}
                     onclick="window.location.assign('/month/{{year}}/{{month_num}}')"
                     style="cursor: pointer;">
                     <h2>{{ month.name }}.</h2>

@@ -2,6 +2,7 @@ front_env
 secrets.ini
 config
 *.pem
+static
 
 # TEMPLATE:
 # Byte-compiled / optimized / DLL files
@@ -130,6 +131,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+lenv/
 ENV/
 env.bak/
 venv.bak/
