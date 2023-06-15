@@ -1,6 +1,7 @@
 front_env
 secrets.ini
 config
+*.pem
 
 # TEMPLATE:
 # Byte-compiled / optimized / DLL files

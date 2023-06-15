@@ -18,9 +18,10 @@
         }
 
         .title {
-            margin: 1.5em 5%;
-            font-size: 2em;
+            margin: 4% 0;
+            font-size: 4em;
             font-weight: bold;
+            text-align: center;
         }
 
             .title, .title a {
@@ -32,7 +33,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             align-items: start;
-            gap: 3vw;
+            gap: 2vw;
+            padding: 0 4vw;
         }
 
         .month-box {
@@ -51,7 +53,6 @@
             grid-template-columns: repeat(7, 1fr);
             grid-gap: 0;
             width: 100%;
-            margin-bottom: 80px;
         }
 
             .square-tile {
@@ -82,9 +83,7 @@
     </head>
     <body>
         <div class="title">
-            <a href="/month/{{year}}/{{last_month}}/" class="hovertext">&lt;</a>
             <span>{{ year }}</span>
-            <a href="/month/{{year}}/{{next_month}}/" class="hovertext">&gt;</a>
         </div>
         <div class="months-container">
         {% if months %}
@@ -93,7 +92,7 @@
                 {% if month.days_set.15 %}
                     onclick="window.location.assign('/month/{{year}}/{{month_num}}')"
                     style="cursor: pointer;">
-                    <h1>{{ month.name }} {{ year }}</h1>
+                    <h2>{{ month.name }}.</h2>
                 {% else %}
                 >
                 {% endif %}
