@@ -13,7 +13,7 @@ def dark_mode(request):
     return False
 
 def index(request):
-    return HttpResponse("Image lib index")
+    return render(request, 'imgapp/home.html', {})
 
 def image_list(request):
     images_list = Image.objects.all()

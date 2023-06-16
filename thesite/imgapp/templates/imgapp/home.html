@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imglib</title>
+    <style>
+        {% if dark %}
+        body {
+            background-color: #1d1d1d;
+            color: #d4d4d4;
+        }
+        {% endif %}
+
+        body {
+            margin: 0;
+        }
+
+        .title {
+            padding-top: 30px;
+            padding-left: 5%;
+            margin-bottom: 60px;
+        }
+
+            .title > h1 {
+                font-size: 112px;
+                margin: 0;
+            }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .album-box {
+            position: relative;
+            width: 100%;
+            background: #eee;
+            height: 200px;
+        }
+
+            .album-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .album-title {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3em;
+                margin: 0;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <h1>imglib/</h1>
+    </div>
+    <div class="content">
+        <a class="album-box" href="/year/2023">
+
+            <img class="album-image"
+                src="https://s3.us-west-2.amazonaws.com/img.dump/image/aa5844e8-ae93-4c06-9b9f-7deb189e6dc3_1080.jpg"
+                alt="2023"/>
+
+            <h2 class="album-title">2023/</h3>
+        </a>
+    </div>
+</body>
+</html>
