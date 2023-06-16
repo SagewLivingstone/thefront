@@ -31,8 +31,7 @@
         
         .months-container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            align-items: start;
+            grid-template-columns: repeat(auto-fill, minmax(min(16em, 100%), 1fr));
             gap: 2vw;
             padding: 0 4vw;
         }
@@ -83,7 +82,7 @@
     </head>
     <body>
         <div class="title">
-            <span>{{ year }}</span>
+            <a href="/" style="color: black;">{{ year }}/</a>
         </div>
         <div class="months-container">
         {% if months %}
@@ -92,7 +91,7 @@
                 {% if month.has_days %}
                     onclick="window.location.assign('/month/{{year}}/{{month_num}}')"
                     style="cursor: pointer;">
-                    <h2>{{ month.name }}.</h2>
+                    <h2>{{ month.name }}/</h2>
                 {% else %}
                 >
                 {% endif %}
