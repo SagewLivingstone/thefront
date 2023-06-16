@@ -6,7 +6,7 @@ sudo pkill -fe "^python -m gunicorn"
 sudo rm -v '/var/log/gunicorn/access.log'
 sudo rm -v '/var/log/gunicorn/error.log'
 
-git pull origin master
+sudo git pull origin master
 pip install -r requirements.txt
 
 cd thesite/
