@@ -1,13 +1,11 @@
 # To-do
 
-- Implement home view (years)
-- Implement year view
-- Re-style controls
-- Toggle-able dark mode
+- Redo controls
 - Re-style caption
   - Caption day, instead of each photo
-- Put a CDN in front of AWS, or switch to Wasabi
 - Make the site not look like trash on mobile
+- Toggle-able dark mode
+- Put a CDN in front of AWS, or switch to Wasabi
 
 ## Longer-term
 - Implement albums (for trips etc...)

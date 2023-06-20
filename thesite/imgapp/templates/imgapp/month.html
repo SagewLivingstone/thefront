@@ -21,6 +21,7 @@
             margin: 1.5em 5%;
             font-size: 2em;
             font-weight: bold;
+            text-align: center;
         }
 
             .title, .title a {
@@ -31,15 +32,42 @@
 
         .calendar-container {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: 1fr;
             grid-gap: 8px;
-            max-width: 80%;
+            max-width: 90%;
             margin: auto;
             margin-bottom: 80px;
         }
+        
+        .fill-day {
+            display: none;
+        }
+        
+        .empty-square {
+            display: none;
+        }
+
+        @media (min-width: 600px) {
+            .calendar-container {
+                grid-template-columns: repeat(7, 1fr);
+                max-width: 80%;
+            }
+
+            .fill-day {
+                display: block;
+            }
+            
+            .empty-square {
+                display: block;
+            }
 
             .square-tile {
-                padding-top: 100%;
+                padding-top: 100% !important;
+            }
+        }
+
+            .square-tile {
+                padding-top: 25%;
                 box-sizing: border-box;
                 position: relative;
             }
@@ -76,18 +104,20 @@
         </style>
     </head>
     <body>
+
         <div class="title">
             <a href="/month/{{year}}/{{last_month}}/" class="hovertext">&lt;</a>
-            <span>{{ month_name }} <a href="/year/{{year}}" class="hovertext">
+            <span>{{ month_name }}<a href="/year/{{year}}" class="hovertext">
                 {{ year }}</a>
             </span>
             <a href="/month/{{year}}/{{next_month}}/" class="hovertext">&gt;</a>
         </div>
+
         {% if days_set %}
             <div class="calendar-container">
                 {% comment %} Blank days at the beginning {% endcomment %}
                 {% for i in fill_days %}
-                    <div class="square-tile">
+                    <div class="square-tile fill-day">
                     </div>
                 {% endfor %}
                 {% for day in days_set %}
