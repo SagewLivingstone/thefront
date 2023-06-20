@@ -5,6 +5,7 @@
   - Caption day, instead of each photo
 - Make the site not look like trash on mobile
 - Toggle-able dark mode
+- Use partials and layout templates
 - Put a CDN in front of AWS, or switch to Wasabi
 
 ## Longer-term

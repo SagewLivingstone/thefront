@@ -10,21 +10,61 @@
         <style>
             .controls {
                 position: fixed;
-                top: 10px;
-                left: 10px;
                 z-index: 1000;
                 mix-blend-mode: difference;
             }
+
+                .controls > .left-control {
+                    position: fixed;
+                    top: 50vh;
+                    left: 0;
+                    width: 10vw;
+                    height: 70vh;
+                    transform: translate(0, -50%);
+                }
+
+                .controls > .right-control {
+                    position: fixed;
+                    top: 50vh;
+                    right: 0;
+                    width: 10vw;
+                    height: 70vh;
+                    transform: translate(0, -50%);
+                }
+
+                .controls > .up-control {
+                    position: fixed;
+                    top: 0;
+                    left: 50vw;
+                    width: 60vw;
+                    height: 10vh;
+                    transform: translate(-50%, 0);
+                }
             
                 .controls a {
+                    font-size: 4em;
                     text-decoration: none;
                     color: white;
+
+                    {% comment %} background: green; {% endcomment %}
+                    opacity: 0;
+
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    transition: opacity 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
                 }
 
                 .controls > a:hover {
-                    {% comment %} text-decoration: overline; {% endcomment %}
-                    {% comment %} Not sure about this {% endcomment %}
+                    opacity: 100%;
                 }
+
+            @media (max-width: 600px) {
+                .controls > .left-control {
+                    min-width: 100px;
+                }
+            }
 
             {% comment %} Wide image {% endcomment %}
             .image-block {
@@ -79,11 +119,14 @@
         </style>
     </head>
     <body style="margin: 0;">
+        <!-- Controls -->
         <div class="controls">
-            <a href="{{month_url}}">^ up</a> 
-            <a href="{{prev_url}}">&lt; prev</a> 
-            <a href="{{next_url}}">next &gt;</a> 
+            <a class="left-control" href="{{prev_url}}">&lt;</a> 
+            <a class="up-control" href="{{month_url}}">^</a> 
+            <a class="right-control" href="{{next_url}}">&gt;</a> 
         </div>
+
+        <!-- Main -->
         <div>
             {% if images %}
                 {% for image in images %}
