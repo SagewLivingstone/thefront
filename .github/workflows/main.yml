@@ -21,7 +21,7 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
 
           working-directory: /home/ubuntu/thefront
-          command: /bin/sh ./deploy.sh
+          command: /bin/sh ./deploy.sh > /var/log/thefront/deploy.log
           comment: Deploy master branch
 
       # Catch SSM outputs
