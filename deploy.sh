@@ -1,12 +1,14 @@
 #!/bin/sh
 echo "START: Changes detected on master, redeploying..."
+pwd
 . venv/bin/activate
 
 sudo pkill -fe "^python -m gunicorn"
 sudo rm -v '/var/log/gunicorn/access.log'
 sudo rm -v '/var/log/gunicorn/error.log'
 
-sudo git pull origin master
+sudo git fetch -v
+sudo git pull -v origin master
 pip install -r requirements.txt
 
 cd thesite/
