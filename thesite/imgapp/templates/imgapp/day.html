@@ -10,7 +10,7 @@
         <style>
             .controls {
                 position: fixed;
-                z-index: 1000;
+                z-index: 2;
                 mix-blend-mode: difference;
             }
 
@@ -61,10 +61,36 @@
                 }
 
             @media (max-width: 600px) {
-                .controls > .left-control {
+                .controls > .left-control,
+                .controls > .right-control, {
                     min-width: 100px;
                 }
             }
+
+            .caption {
+                position: absolute;
+                bottom: 11vh;
+                left: 6vw;
+                text-align: left;
+                white-space: pre-line;
+                max-width: 30vw;
+                z-index: 3;
+                color: white;
+                text-shadow: 0px 0px 2px black;
+            }
+
+            .caption-tall {
+                padding-right: 2vw;
+                padding-bottom: 2vh;
+                max-width: 25vw;
+                color: black;
+            }
+
+                .caption-right {
+                    text-align: right;
+                    padding-right: 0;
+                    padding-left: 2vw;
+                }
 
             {% comment %} Wide image {% endcomment %}
             .image-block {
@@ -102,8 +128,17 @@
                 align-items: center;
             }
 
+                .image-row {
+                    width: 100%;
+                    padding: 0 10%;
+                    display: flex;
+                    align-items: end;
+                    justify-content: space-between;
+                }
+
                 .image-block-tall img {
                     max-height: 80vh;
+                    max-width: 60vw;
                     {% if dark %}padding: 3px; background-color: #2b2b2b{% endif %}
                 }
 
@@ -111,29 +146,16 @@
                     margin: 10px 18px;
                 }
 
-                .image-caption-block-left {
-                    padding-left: 10%;
-                    display: flex;
-                    align-items: end;
-                }
-
-                .image-caption-block-right {
-                    padding-right: 10%;
-                    display: flex;
-                    align-items: end;
-                    text-align: right;
-                }
-
             @media (max-width: 600px) {
                 .image-block-tall img {
                     max-width: 90vw;
                 }
 
-                .image-caption-block-left {
+                .image-row-left {
                     padding-left: 5vw;
                 }
 
-                .image-caption-block-right {
+                .image-row-right {
                     padding-right: 5vw;
                 }
             }
@@ -160,20 +182,43 @@
                             {% comment %} <p class="image-caption">{{image|linebreaksbr}}</p> {% endcomment %}
                         </div>
                     </div>
+                {% if forloop.first %}
+                    <div class="caption">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
+                        Lorem ipsum dolor sit.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
+                    </div>
+                {% endif %}
 
                 <!-- Tall Image -->
                 {% else %}
-                    <div class="image-block-tall"
-                            style="flex-direction: {% if not image.left %}row-reverse{% else %}row{% endif %};">
+                    <div class="image-block-tall">
+                        <!-- Left Image -->
                         {% if image.left %}
-                        <div class="image-caption-block-left">
+                        <div class="image-row">
                             <img src="{{ image.image_normal.url }}"
                                 alt="Image: [{{image}}]"/>
                             {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
+                            {% if forloop.first %}
+                                <div class="caption-tall caption-right">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
+                                    Lorem ipsum dolor sit.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
+                                </div>
+                            {% endif %}
                         </div>
+
+                        <!-- Right Image -->
                         {% else %}
-                        <div class="image-caption-block-right">
+                        <div class="image-row">
                             {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
+                            {% if forloop.first %}
+                                <div class="caption-tall">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
+                                    Lorem ipsum dolor sit.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
+                                </div>
+                            {% endif %}
                             <img src="{{ image.image_normal.url }}"
                                 alt="Image: [{{image}}]"/>
                         </div>

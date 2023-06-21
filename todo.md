@@ -6,6 +6,7 @@
 - Toggle-able dark mode
 - Use partials and layout templates
 - Put a CDN in front of AWS, or switch to Wasabi
+- Photo and camera details behind a toggle (time, camera, settings, etc.)
 
 ## Longer-term
 - Implement albums (for trips etc...)
