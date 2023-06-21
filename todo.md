@@ -1,6 +1,5 @@
 # To-do
 
-- Redo controls
 - Re-style caption
   - Caption day, instead of each photo
 - Make the site not look like trash on mobile
