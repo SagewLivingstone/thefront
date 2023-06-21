@@ -157,6 +157,15 @@
                     padding: 0 5vw;
                 }
 
+                .caption {
+                    color: black;
+                    text-shadow: none;
+                    max-width: 80vw;
+                    text-align: justify;
+                    padding: 0 5vw;
+                    left: unset;
+                }
+
                 .caption-tall {
                     padding: 0vw 5vw;
                     max-height: 20vw;
@@ -186,14 +195,14 @@
                                 style="max-width: 100%;"/>
                             {% comment %} <p class="image-caption">{{image|linebreaksbr}}</p> {% endcomment %}
                         </div>
+                        {% if forloop.first %}
+                            <div class="caption">
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
+                                Lorem ipsum dolor sit.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
+                            </div>
+                        {% endif %}
                     </div>
-                {% if forloop.first %}
-                    <div class="caption">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
-                        Lorem ipsum dolor sit.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
-                    </div>
-                {% endif %}
 
                 <!-- Tall Image -->
                 {% else %}
