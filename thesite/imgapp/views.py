@@ -54,6 +54,7 @@ def date(request, year, month, day):
     context = {
         'dark': dark_mode(request),
         'images': image_set,
+        'caption': daypage.caption,
         'date': date,
         'date_str': datetime.date.strftime(date, '%m/%d/%y'),
         'prev_url': prev_url,
@@ -90,6 +91,7 @@ def month(request, year, month):
         'days_set': days_list,
         'fill_days': range(fill_days),
         'month_name': calendar.month_name[month],
+        'month_abbr': calendar.month_abbr[month],
         'year': str(year),
         'last_month': (month-2) % 12 + 1, # Need to handle next/prev year, lol
         'next_month': (month % 12) + 1
