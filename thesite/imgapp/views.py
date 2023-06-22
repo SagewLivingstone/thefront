@@ -54,6 +54,7 @@ def date(request, year, month, day):
     context = {
         'dark': dark_mode(request),
         'images': image_set,
+        'caption': daypage.caption,
         'date': date,
         'date_str': datetime.date.strftime(date, '%m/%d/%y'),
         'prev_url': prev_url,

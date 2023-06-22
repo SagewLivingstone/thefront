@@ -196,11 +196,7 @@
                             {% comment %} <p class="image-caption">{{image|linebreaksbr}}</p> {% endcomment %}
                         </div>
                         {% if forloop.first %}
-                            <div class="caption">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
-                                Lorem ipsum dolor sit.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
-                            </div>
+                            <div class="caption">{{ caption | linebreaksbr }}</div>
                         {% endif %}
                     </div>
 
@@ -214,11 +210,7 @@
                                 alt="Image: [{{image}}]"/>
                             {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
                             {% if forloop.first %}
-                                <div class="caption-tall caption-right">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
-                                    Lorem ipsum dolor sit.
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
-                                </div>
+                                <div class="caption-tall caption-right">{{ caption | linebreaksbr }}</div>
                             {% endif %}
                         </div>
 
@@ -227,11 +219,7 @@
                         <div class="image-row">
                             {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
                             {% if forloop.first %}
-                                <div class="caption-tall">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, blanditiis.
-                                    Lorem ipsum dolor sit.
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste eum ducimus animi quod? Aliquam adipisci sint porro hic quo.
-                                </div>
+                                <div class="caption-tall">{{ caption | linebreaksbr }}</div>
                             {% endif %}
                             <img src="{{ image.image_normal.url }}"
                                 alt="Image: [{{image}}]"/>

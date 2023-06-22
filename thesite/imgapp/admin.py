@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Image, ImageMetadata
+from .models import Image, ImageMetadata, DayPage
 
 class ImageMetadataAdmin(admin.StackedInline):
     model = ImageMetadata
@@ -21,3 +21,15 @@ class ImageAdmin(admin.ModelAdmin):
         'height'
     ]
     inlines = [ImageMetadataAdmin]
+
+@admin.register(DayPage)
+class DayPageAdmin(admin.ModelAdmin):
+    readonly_fields = [
+        'date'
+    ]
+
+    class ImageInline(admin.TabularInline):
+        model = Image
+        extra = 0
+
+    inlines = [ImageInline]

@@ -28,9 +28,13 @@ class DayPage(models.Model):
         ).order_by('date') .last()
         if prev:
             return prev.date
+    
+    @property
+    def caption_inline(self):
+        return self.caption.replace('\n', ' | ')
 
     def __str__(self) -> str:
-        return "Day: " + str(self.date)
+        return f"Day: {str(self.date)} ({self.image_set.count()} image{'s' if self.image_set.count() > 1 else ''})   \"{self.caption_inline}\""
 
 class Image(models.Model):
     """
@@ -46,7 +50,7 @@ class Image(models.Model):
     image_thumbnail =   models.ImageField(upload_to="image", null=True, editable=False)
     uuid =              models.CharField(max_length=36, default=uuid.uuid4, null=False, editable=False)
     original_filename = models.CharField(max_length=50, null=True, editable=False)
-    caption =           models.TextField()
+    description =           models.TextField()
     created_at =        models.DateTimeField(auto_now_add=True)
     updated_at =        models.DateTimeField(auto_now=True)
     width =             models.IntegerField(null=True, editable=False)
@@ -162,7 +166,7 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return (datetime.strftime(self.day.date, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.caption
+        return (datetime.strftime(self.day.date, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.description
 
 class ImageMetadata(models.Model):
     """
@@ -196,4 +200,4 @@ class ImageMetadata(models.Model):
         self.iso = exifdict.get('ISOSpeedRatings') or self.iso
 
     def __str__(self) -> str:
-        return f'EXIF: [{self.image.caption}]'
+        return f'EXIF: [{self.image.description}]'
