@@ -211,7 +211,14 @@
                             <img src="{{ image.image.url }}"
                                 alt="Image: [{{image}}]"
                                 style="max-width: 100%;"/>
-                            <p class="image-caption">{{ image.timestamp_str }}</p>
+                            <p class="image-caption">{{ image.metadata.camera }}
+                                {{ image.metadata.lens | default:"--" }}
+                                {{ image.metadata.focallength | default:"???" }}mm
+                                f/{{ image.metadata.fnumber | default:"???" }}
+                                {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s
+                                iso {{ image.metadata.iso | default:"???" }}
+
+                                {{ image.timestamp_str }}</p>
                             <p class="image-caption" style="opacity: 0.1;"> 88  18  88  888  88:88</p>
                         </div>
                         {% if forloop.first %}

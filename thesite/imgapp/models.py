@@ -3,6 +3,7 @@ import uuid
 import PIL.Image
 from datetime import datetime, date
 from io import BytesIO
+from fractions import Fraction
 
 from django.db import models
 from django.core.files.base import ContentFile
@@ -186,6 +187,10 @@ class ImageMetadata(models.Model):
     shutterspeed =  models.CharField(max_length=20, null=True, blank=True)
     iso =           models.CharField(max_length=10, null=True, blank=True)
     location =      models.CharField(max_length=30, null=True, blank=True)
+
+    @property
+    def shutterspeed_fraction(self):
+        return Fraction(self.shutterspeed).limit_denominator(10_000)
     
     image = models.OneToOneField(
         Image,
