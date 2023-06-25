@@ -6,7 +6,8 @@
         <title>{{ date }} | imglib</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <link rel="stylesheet" href="">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'imgapp/top.css' %}">
         <style>
             html {
                 padding: env(safe-area-inset);
@@ -112,11 +113,21 @@
                 }
 
                 .image-block .image-caption {
-                    color: white;
+                    font-family: "DS-Digital";
+                    font-style: italic;
+                    font-size: 150%;
+                    
+                    mix-blend-mode: screen;
+                    color: #ff9e02;
+                    text-shadow: 0 0 11px red;
+                    opacity: 0.7;
+
                     position: absolute;
                     right: 5%;
                     bottom: 5%;
                     text-align: right;
+                    z-index: 4;
+                    white-space: pre;
                 }
 
             @media (max-width: 600px) {
@@ -200,7 +211,8 @@
                             <img src="{{ image.image.url }}"
                                 alt="Image: [{{image}}]"
                                 style="max-width: 100%;"/>
-                            {% comment %} <p class="image-caption">{{image|linebreaksbr}}</p> {% endcomment %}
+                            <p class="image-caption">{{ image.timestamp_str }}</p>
+                            <p class="image-caption" style="opacity: 0.1;"> 88  18  88  888  88:88</p>
                         </div>
                         {% if forloop.first %}
                             <div class="caption">{{ caption | linebreaksbr }}</div>

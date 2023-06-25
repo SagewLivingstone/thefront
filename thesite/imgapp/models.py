@@ -60,6 +60,12 @@ class Image(models.Model):
 
     exifdata = None
 
+    @property
+    def timestamp_str(self):
+        if (self.metadata is None): return None
+
+        return self.metadata.capture_date.strftime(" %y %m  %d  %a  %H:%M").replace(" 0", "   ").replace(" 1", "  1")
+
     def load_metadata_dict(self):
         """
         Load metadata before image has been sent to storage

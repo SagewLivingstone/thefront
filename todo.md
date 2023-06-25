@@ -4,6 +4,7 @@
 - Toggle-able dark mode
 - Use partials and layout templates
 - Put a CDN in front of AWS, or switch to Wasabi
+- favicon
 
 ## Longer-term
 - Implement albums (for trips etc...)
