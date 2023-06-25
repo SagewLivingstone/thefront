@@ -2,7 +2,7 @@ front_env
 secrets.ini
 config
 *.pem
-static
+/static/
 
 # TEMPLATE:
 # Byte-compiled / optimized / DLL files
