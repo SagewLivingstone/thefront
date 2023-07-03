@@ -65,7 +65,7 @@ class Image(models.Model):
     def timestamp_str(self):
         if (self.metadata is None): return None
 
-        return self.metadata.capture_date.strftime(" %y %m  %d  %a  %H:%M").replace(" 0", "   ").replace(" 1", "  1")
+        return self.metadata.capture_date.strftime(" %y %m  %d  %a  %H:%M").replace(" 0", "   ").replace("1", " 1") # Pad out the 1's to monospace
 
     def load_metadata_dict(self):
         """

@@ -105,22 +105,53 @@ html {
     position: relative;
 }
 
-.image-block .image-caption {
-    font-family: "DS-Digital";
-    font-style: italic;
-    font-size: 150%;
 
-    mix-blend-mode: screen;
-    color: #ff9e02;
-    text-shadow: 0 0 11px red;
-    opacity: 0.7;
+/* Image Timestamp/Details: */
+.image-caption {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 150%;
+    text-align: right;
 
     position: absolute;
     right: 5%;
     bottom: 5%;
-    text-align: right;
     z-index: 4;
-    white-space: pre;
+
+    opacity: 0.2;
+}
+
+div.image-timestamp {
+    position: relative;
+    padding: 10px;
+
+    opacity: 0;
+}
+
+    .image-timestamp:hover {
+        opacity: initial;
+    }
+
+    .image-timestamp > span {
+        white-space: pre;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+    }
+
+div.image-details {
+    padding-bottom: 1em;
+}
+
+.digital-display {
+    font-family: "DS-Digital";
+    font-style: italic;
+
+    mix-blend-mode: screen;
+    color: #ff9e02;
+    text-shadow: 0 0 11px red;
 }
 
 @media (max-width: 600px) {

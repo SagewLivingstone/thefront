@@ -168,5 +168,5 @@ SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 CSP_IMG_SRC = ["'self'", "s3.us-west-2.amazonaws.com"]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
-CSP_SCRIPT_SRC = ["'self'", "'unsafe-inline'"]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-inline'", "'unsafe-eval'", "cdn.jsdelivr.net"]
 
