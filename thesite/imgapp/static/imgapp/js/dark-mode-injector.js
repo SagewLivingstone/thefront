@@ -1,4 +1,3 @@
-
 let currentTheme = 'light';
 
 const darkModeStyles = `
@@ -114,8 +113,8 @@ function checkDarkMode() {
         enableDarkMode();
 }
 
-const setLightTheme = () => overrideTheme('light');
-const setDarkTheme = () => overrideTheme('dark');
+window.setLightTheme = () => overrideTheme('light');
+window.setDarkTheme = () => overrideTheme('dark');
 
 // Initalize the dark theme element
 const styleElement = document.createElement("style");

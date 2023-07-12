@@ -1,0 +1,18 @@
+.theme-toggle {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.theme-toggle-button {
+    opacity: 0;
+    padding: 6px;
+}
+
+.theme-toggle-button:hover {
+    opacity: 1;
+}
+
+    .theme-toggle-button > .fa-moon {
+        color: #d4d4d4;
+    }
