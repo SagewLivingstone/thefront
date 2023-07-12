@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'imgapp/dark-toggle.css' %}">
+<script src="{% static 'imgapp/js/dark-mode-injector.js' %}"></script>
+
+<div class="theme-toggle" x-data="{ dark: currentTheme === 'dark' }">
+    <div class="theme-toggle-button"
+            @click="setDarkTheme(); dark = true;"
+            x-show="!dark">
+        <i class="fa-solid fa-sun"></i>
+    </div>
+    <div class="theme-toggle-button"
+            @click="setLightTheme(); dark = false;"
+            x-show="dark">
+        <i class="fa-solid fa-moon"></i>
+    </div>
+</div>
