@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://kit.fontawesome.com/da90fcce56.js" crossorigin="anonymous"></script>
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'imgapp/top.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'imgapp/day.css' %}">
@@ -18,6 +19,10 @@
             <a class="left-control" href="{{prev_url}}">&lt;</a> 
             <a class="up-control" href="{{month_url}}">^</a> 
             <a class="right-control" href="{{next_url}}">&gt;</a> 
+        </div>
+
+        <div class="theme-toggle">
+            <i class="fa-solid fa-sun"></i>
         </div>
 
         <!-- Main -->
