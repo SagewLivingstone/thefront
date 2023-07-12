@@ -119,8 +119,41 @@ html {
     bottom: 5%;
     z-index: 4;
 
-    opacity: 0.2;
+    opacity: 0.3;
 }
+
+.image-caption-left {
+    left: 11%;
+    top: 11%;
+    right: unset;
+    bottom: unset;
+    writing-mode: vertical-rl;
+    text-align: left;
+}
+
+.image-caption-right {
+    right: 11%;
+    top: 11%;
+    left: unset;
+    bottom: unset;
+    writing-mode: vertical-rl;
+    text-align: left;
+
+    flex-direction: column-reverse;
+}
+
+    .image-caption-left > .image-timestamp > span,
+    .image-caption-right > .image-timestamp > span {
+        top: 0;
+    }
+
+    .image-caption-left > .image-details {
+        padding-left: 1em;
+    }
+
+    .image-caption-right > .image-details {
+        padding-right: 1em;
+    }
 
 div.image-timestamp {
     position: relative;
@@ -187,10 +220,6 @@ div.image-details {
     padding: 3px;
     background-color: #2b2b2b
     */
-}
-
-.image-tall-caption {
-    margin: 10px 18px;
 }
 
 @media (max-width: 600px) {

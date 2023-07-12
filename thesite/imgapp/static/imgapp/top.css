@@ -27,3 +27,6 @@
 body {
     margin: 0;
 }
+
+/* x-cloak initialization for Alpine */
+[x-cloak] { display: none !important; }
