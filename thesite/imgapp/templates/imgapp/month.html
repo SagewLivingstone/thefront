@@ -5,14 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ month_abbr }} {{ year }} | imglib</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        {% if dark %}
-        body {
-            background-color: #1d1d1d;
-            color: #d4d4d4;
-        }
-        {% endif %}
-
         .hovertext:hover {
             color: #777 !important;
         }
@@ -26,7 +20,7 @@
 
             .title, .title a {
                 text-decoration: none;
-                color: {% if dark %}#d4d4d4{% else %}black{% endif %}
+                color: black;
             }
         
 
@@ -73,7 +67,7 @@
             }
 
                 .empty-square {
-                    background-color: {% if dark %}#2b2b2b{% else %}#eee{% endif %}
+                    background-color: #eee;
                 }
 
                 .day-tile {
@@ -104,6 +98,7 @@
         </style>
     </head>
     <body>
+        {% include 'imgapp/components/_dark_mode.html' %}
 
         <div class="title">
             <a href="/month/{{year}}/{{last_month}}/" class="hovertext">&lt;</a>

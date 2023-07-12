@@ -1,6 +1,21 @@
 let currentTheme = 'light';
 
 const darkModeStyles = `
+body {
+    background-color: #1d1d1d;
+    color: #d4d4d4;
+}
+
+/* Month Page */
+.title, .title a {
+    color: #d4d4d4;
+}
+
+.empty-square {
+    background-color: #2b2b2b;
+}
+
+/* Day Page */
 .image-block {
     background-color: #1d1d1d;
 }
@@ -102,13 +117,13 @@ function checkDarkMode() {
     const override = themeOverridden();
     console.log("end", override)
 
-    if (override === 'dark'){
+    if (override === 'dark') {
         enableDarkMode();
         return;
     }
     if (override === 'light')
         return;
-    
+
     if (isDarkModeHour())
         enableDarkMode();
 }
