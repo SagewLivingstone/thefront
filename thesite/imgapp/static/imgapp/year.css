@@ -47,6 +47,10 @@
     position: relative;
 }
 
+.calendar-container .square-tile {
+    border: none !important;
+}
+
 .empty-square {
     background-color: #eee;
 }
