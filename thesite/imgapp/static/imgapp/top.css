@@ -30,3 +30,7 @@ body {
 
 /* x-cloak initialization for Alpine */
 [x-cloak] { display: none !important; }
+
+.hovertext:hover {
+    color: #777 !important;
+}

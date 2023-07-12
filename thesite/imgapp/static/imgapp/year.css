@@ -1,0 +1,66 @@
+.hovertext:hover {
+    color: #777 !important;
+}
+
+.title {
+    margin: 4% 0;
+    font-size: 4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.title,
+.title a {
+    text-decoration: none;
+
+    color: black;
+}
+
+.months-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(16em, 100%), 1fr));
+    gap: 2vw;
+    padding: 0 4vw;
+}
+
+.month-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.month-box:hover {
+    opacity: 0.8;
+    color: #444 !important;
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 0;
+    width: 100%;
+}
+
+.square-tile {
+    padding-top: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.empty-square {
+    background-color: #eee;
+}
+
+.day-tile {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.day-tile .image-block {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -15,6 +15,14 @@ body {
     background-color: #2b2b2b;
 }
 
+.fill-day {
+    border: none !important;
+}
+
+.square-tile {
+    border: 2px solid #2b2b2b;
+}
+
 /* Day Page */
 .image-block {
     background-color: #1d1d1d;
@@ -115,7 +123,6 @@ function overrideTheme(theme) {
 /** Check the current theme, and enable dark mode if necessary */
 function checkDarkMode() {
     const override = themeOverridden();
-    console.log("end", override)
 
     if (override === 'dark') {
         enableDarkMode();

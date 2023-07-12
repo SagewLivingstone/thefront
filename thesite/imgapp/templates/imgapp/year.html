@@ -5,84 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ year }} | imglib</title>
-    <style>
-        {% if dark %}
-        body {
-            background-color: #1d1d1d;
-            color: #d4d4d4;
-        }
-        {% endif %}
-
-        .hovertext:hover {
-            color: #777 !important;
-        }
-
-        .title {
-            margin: 4% 0;
-            font-size: 4em;
-            font-weight: bold;
-            text-align: center;
-        }
-
-            .title, .title a {
-                text-decoration: none;
-                color: {% if dark %}#d4d4d4{% else %}black{% endif %}
-            }
-        
-        .months-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(16em, 100%), 1fr));
-            gap: 2vw;
-            padding: 0 4vw;
-        }
-
-        .month-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-            .month-box:hover {
-                opacity: 0.8;
-                color: #444 !important;
-            }
-
-        .calendar-container {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-gap: 0;
-            width: 100%;
-        }
-
-            .square-tile {
-                padding-top: 100%;
-                box-sizing: border-box;
-                position: relative;
-            }
-
-                .empty-square {
-                    background-color: {% if dark %}#2b2b2b{% else %}#eee{% endif %}
-                }
-
-                .day-tile {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    left: 0;
-                    bottom: 0;
-                }
-                
-                    .day-tile .image-block {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-
-        </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'imgapp/top.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'imgapp/year.css' %}">
     </head>
     <body>
+        {% include 'imgapp/components/_dark_mode.html' %}
+
         <div class="title">
-            <a href="/" style="color: black;">{{ year }}/</a>
+            <a href="/" class="hovertext">{{ year }}/</a>
         </div>
         <div class="months-container">
         {% if months %}
@@ -98,7 +30,7 @@
                 <div class="calendar-container">
                     {% comment %} Blank days at the beginning {% endcomment %}
                     {% for i in month.fill_days %}
-                        <div class="square-tile">
+                        <div class="square-tile fill-day">
                         </div>
                     {% endfor %}
                     {% for day in month.days_set %}
