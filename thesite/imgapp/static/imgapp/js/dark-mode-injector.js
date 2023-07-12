@@ -58,7 +58,7 @@ function isDarkModeHour() {
     const currentTime = new Date();
     const currentHour = currentTime.getHours();
 
-    return currentHour < 6 || currentHour > 20;
+    return currentHour < 6 || currentHour >= 21;
 }
 
 /** Round a date to the next 6am, or 8pm */
@@ -70,8 +70,8 @@ function getNextSunriseSunsetDate() {
         currentDate.setHours(6, 0, 0, 0); // Set to 6:00 am on the current day
     }
     // Check if it's between 6:00 am and 8:00 pm
-    else if (currentDate.getHours() >= 6 && currentDate.getHours() < 20) {
-        currentDate.setHours(20, 0, 0, 0); // Set to 8:00 pm on the current day
+    else if (currentDate.getHours() >= 6 && currentDate.getHours() < 21) {
+        currentDate.setHours(21, 0, 0, 0); // Set to 9:00 pm on the current day
     }
     // Otherwise, it's after 8:00 pm
     else {
