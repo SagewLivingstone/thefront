@@ -95,7 +95,7 @@ html {
 .image-block {
     min-height: 100vh;
 
-    background-color: black; /* Dark: #1d1d1d */
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -198,8 +198,7 @@ div.image-details {
 
 .image-block-tall {
     min-height: 100vh;
-    background-color: white; /* Dark: #1d1d1d */
-    color: black; /* Dark: #d4d4d4 */
+    background-color: white;
     display: flex;
     align-items: center;
 }
@@ -215,11 +214,6 @@ div.image-details {
 .image-block-tall img {
     max-height: 80vh;
     max-width: 60vw;
-
-    /* Dark:
-    padding: 3px;
-    background-color: #2b2b2b
-    */
 }
 
 @media (max-width: 600px) {
