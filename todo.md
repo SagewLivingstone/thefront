@@ -1,10 +1,11 @@
 # To-do
-
-- Photo and camera details behind a toggle (time, camera, settings, etc.)
-- Toggle-able dark mode
 - Use partials and layout templates
 - Put a CDN in front of AWS, or switch to Wasabi
 - favicon
+
+## Bugs
+- Image timestamp on right images jumps to top
+- Last day goes to nothing
 
 ## Longer-term
 - Implement albums (for trips etc...)
