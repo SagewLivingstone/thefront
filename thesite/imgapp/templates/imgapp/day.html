@@ -34,8 +34,9 @@
                                 style="max-width: 100%;"/>
 
                             {% comment %} Image Caption {% endcomment %}
-                            <div class="image-caption" x-data="{ showDetails: false }">
-                                <div class="image-details digital-display" x-show="showDetails"
+                            <div class="image-details" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
                                     {{ image.metadata.camera }}<br/>
                                     {{ image.metadata.lens | default:"--" }}<br/>
@@ -65,8 +66,9 @@
                                 alt="Image: [{{image}}]"/>
 
                             {% comment %} Image Caption {% endcomment %}
-                            <div class="image-caption image-caption-left" x-data="{ showDetails: false }">
-                                <div class="image-details digital-display" x-show="showDetails"
+                            <div class="image-details image-details-left" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
                                     {{ image.metadata.camera }}<br/>
                                     {{ image.metadata.lens | default:"--" }}<br/>
@@ -98,8 +100,9 @@
                                 alt="Image: [{{image}}]"/>
 
                             {% comment %} Image Caption {% endcomment %}
-                            <div class="image-caption image-caption-right" x-data="{ showDetails: false }">
-                                <div class="image-details digital-display" x-show="showDetails"
+                            <div class="image-details image-details-right" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
                                     {{ image.metadata.camera }}<br/>
                                     {{ image.metadata.lens | default:"--" }}<br/>

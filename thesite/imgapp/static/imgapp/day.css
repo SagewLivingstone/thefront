@@ -107,7 +107,7 @@ html {
 
 
 /* Image Timestamp/Details: */
-.image-caption {
+.image-details {
     display: flex;
     flex-direction: column;
 
@@ -122,18 +122,20 @@ html {
     opacity: 0.3;
 }
 
-.image-caption-left {
-    left: 11%;
-    top: 11%;
+.image-details-left {
+    position: absolute;
+    left: 11.5%;
+    top: 2%;
     right: unset;
     bottom: unset;
     writing-mode: vertical-rl;
     text-align: left;
 }
 
-.image-caption-right {
-    right: 11%;
-    top: 11%;
+.image-details-right {
+    position: absolute;
+    right: 11.5%;
+    top: 2%;
     left: unset;
     bottom: unset;
     writing-mode: vertical-rl;
@@ -142,16 +144,16 @@ html {
     flex-direction: column-reverse;
 }
 
-    .image-caption-left > .image-timestamp > span,
-    .image-caption-right > .image-timestamp > span {
+    .image-details-left > .image-timestamp > span,
+    .image-details-right > .image-timestamp > span {
         top: 0;
     }
 
-    .image-caption-left > .image-details {
+    .image-details-left > .image-details-metadata {
         padding-left: 1em;
     }
 
-    .image-caption-right > .image-details {
+    .image-details-right > .image-details-metadata {
         padding-right: 1em;
     }
 
@@ -174,7 +176,8 @@ div.image-timestamp {
         cursor: pointer;
     }
 
-div.image-details {
+div.image-details-metadata {
+    cursor: pointer;
     padding-bottom: 1em;
 }
 
@@ -184,7 +187,7 @@ div.image-details {
 
     mix-blend-mode: screen;
     color: #ff9e02;
-    text-shadow: 0 0 11px red;
+    text-shadow: 0 0 10px #ff0000d4;
 }
 
 @media (max-width: 600px) {
@@ -204,6 +207,7 @@ div.image-details {
 }
 
 .image-row {
+    position: relative;
     width: 100%;
     padding: 0 10%;
     display: flex;
