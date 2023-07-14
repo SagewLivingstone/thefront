@@ -124,7 +124,7 @@ html {
 
 .image-details-left {
     position: absolute;
-    left: 11.5%;
+    left: 11%;
     top: 2%;
     right: unset;
     bottom: unset;
@@ -134,7 +134,7 @@ html {
 
 .image-details-right {
     position: absolute;
-    right: 11.5%;
+    right: 11%;
     top: 2%;
     left: unset;
     bottom: unset;
