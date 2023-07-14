@@ -1,7 +1,6 @@
 # To-do
 - Use partials and layout templates
 - Put a CDN in front of AWS, or switch to Wasabi
-- favicon
 
 ## Bugs
 - Image timestamp on right images jumps to top
