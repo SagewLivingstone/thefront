@@ -41,15 +41,10 @@ def date(request, year, month, day):
     # Build page links
     prev = daypage.get_prev_day()
     next = daypage.get_next_day()
-    if prev:
-        prev_url = f'/day/{prev.year}/{prev.month}/{prev.day}/'
-    else:
-        prev_url = '/imglist/'
-    if next:
-        next_url = f'/day/{next.year}/{next.month}/{next.day}/'
-    else:
-        next_url = '/imglist/'
+
     month_url = f'/month/{year}/{month}/'
+    prev_url = f'/day/{prev.year}/{prev.month}/{prev.day}/' if prev else month_url
+    next_url = f'/day/{next.year}/{next.month}/{next.day}/' if next else month_url
 
     context = {
         'dark': dark_mode(request),
