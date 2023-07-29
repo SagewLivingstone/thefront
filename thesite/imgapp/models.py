@@ -1,7 +1,8 @@
 import os
 import uuid
 import PIL.Image
-from datetime import datetime, date
+import pytz
+from datetime import datetime
 from io import BytesIO
 from fractions import Fraction
 
@@ -65,7 +66,9 @@ class Image(models.Model):
     def timestamp_str(self):
         if (self.metadata is None): return None
 
-        return self.metadata.capture_date.strftime(" %y %m  %d  %a  %H:%M").replace(" 0", "   ") \
+        localized_date = self.metadata.capture_date.astimezone(pytz.timezone('America/Los_Angeles'))
+        return localized_date.strftime(" %y %m  %d  %a  %H:%M") \
+            .replace(" 0", "   ") \
             .replace("1", " 1") \
             .replace("i", " i") # Pad out 1's and i's
 
