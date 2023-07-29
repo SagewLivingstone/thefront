@@ -5,13 +5,6 @@ import calendar
 
 from .models import Image, DayPage
 
-def dark_mode(request):
-    """
-    Return bool -> if the page should display dark mode
-    """
-
-    return False
-
 def index(request):
     return render(request, 'imgapp/home.html', {})
 
@@ -47,7 +40,6 @@ def date(request, year, month, day):
     next_url = f'/day/{next.year}/{next.month}/{next.day}/' if next else month_url
 
     context = {
-        'dark': dark_mode(request),
         'images': image_set,
         'caption': daypage.caption,
         'date': date,
@@ -82,13 +74,12 @@ def month(request, year, month):
     days_list, fill_days = _get_days_list(year, month)
 
     context = {
-        'dark': dark_mode(request),
         'days_set': days_list,
         'fill_days': range(fill_days),
         'month_name': calendar.month_name[month],
         'month_abbr': calendar.month_abbr[month],
         'year': str(year),
-        'last_month': (month-2) % 12 + 1, # Need to handle next/prev year, lol
+        'last_month': (month-2) % 12 + 1, # TODO: Need to handle next/prev year, lol
         'next_month': (month % 12) + 1
     }
     return render(request, 'imgapp/month.html', context)
@@ -106,7 +97,6 @@ def year(request, year):
         }
 
     context = {
-        'dark': dark_mode(request),
         'year': str(year),
         'months': months,
         # ...
