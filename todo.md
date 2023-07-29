@@ -1,7 +1,6 @@
 # To-do
 
 ## Finish Before Moving On:
-- Change calendar to start on Sundays instead of Monday
 - Build a base layout template for pages
 - Implement albums (for trips etc...)
 
