@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{ date }} | imglib</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        {% load static %}
+        <link rel="icon" href="{% static 'favicon4.png' %}" type="image/png">
+        <link rel="stylesheet" type="text/css" href="{% static 'imgapp/top.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'imgapp/day.css' %}">
+    </head>
+    <body style="margin: 0;">
+        <!-- Controls -->
+        <div class="controls">
+            <a class="left-control" href="{{prev_url}}">&lt;</a> 
+            <a class="up-control" href="{{month_url}}">^</a> 
+            <a class="right-control" href="{{next_url}}">&gt;</a> 
+        </div>
+
+        {% include 'imgapp/components/_dark_mode.html' %}
+
+        <!-- Main -->
+        <div class="content">
+            {% for image in images %}
+                <!-- Wide Image -->
+                {% if image.wide %}
+                    <div class="image-block">
+                        <div class="image-container">
+                            <img src="{{ image.image.url }}"
+                                alt="Image: [{{image}}]"
+                                style="max-width: 100%;"/>
+
+                            {% comment %} Image Caption {% endcomment %}
+                            <div class="image-details" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
+                                    x-cloak @click="showDetails = false">
+                                    {{ image.metadata.camera }}<br/>
+                                    {{ image.metadata.lens | default:"--" }}<br/>
+                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ image.metadata.iso | default:"???" }}
+                                </div>
+                                <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
+                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
+                                    <span style="opacity: 0.2;"> 88  18  88  888  88:88</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% if forloop.first %}
+                            <div class="caption">{{ caption | linebreaksbr }}</div>
+                        {% endif %}
+                    </div>
+
+                <!-- Tall Image -->
+                {% else %}
+                    <div class="image-block-tall">
+                        <!-- Left Image -->
+                        {% if image.left %}
+                        <div class="image-row">
+                            <img src="{{ image.image_normal.url }}"
+                                alt="Image: [{{image}}]"/>
+
+                            {% comment %} Image Caption {% endcomment %}
+                            <div class="image-details image-details-left" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
+                                    x-cloak @click="showDetails = false">
+                                    {{ image.metadata.camera }}<br/>
+                                    {{ image.metadata.lens | default:"--" }}<br/>
+                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ image.metadata.iso | default:"???" }}
+                                </div>
+                                <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
+                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
+                                    <span style="opacity: 0.2;"> 88  18  88  888  88:88</span>
+                                </div>
+                            </div>
+
+                            {% comment %} First image caption {% endcomment %}
+                            <div class="caption-tall caption-right">
+                                {% if forloop.first %} {{ caption | linebreaksbr }} {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Right Image -->
+                        {% else %}
+                        <div class="image-row">
+                            {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
+                            <div class="caption-tall">
+                                {% if forloop.first %} {{ caption | linebreaksbr }} {% endif %}
+                            </div>
+                            <img src="{{ image.image_normal.url }}"
+                                alt="Image: [{{image}}]"/>
+
+                            {% comment %} Image Caption {% endcomment %}
+                            <div class="image-details image-details-right" x-data="{ showDetails: false }"
+                                :style="{ opacity: showDetails ? '0.7' : '' }">
+                                <div class="image-details-metadata digital-display" x-show="showDetails"
+                                    x-cloak @click="showDetails = false">
+                                    {{ image.metadata.camera }}<br/>
+                                    {{ image.metadata.lens | default:"--" }}<br/>
+                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ image.metadata.iso | default:"???" }}
+                                </div>
+                                <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
+                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
+                                    <span style="opacity: 0.2;"> 88  18  88  888  88:88</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+
+</html>

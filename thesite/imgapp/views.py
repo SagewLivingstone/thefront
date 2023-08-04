@@ -117,3 +117,16 @@ def year(request, year):
         # ...
     }
     return render(request, 'imgapp/year.html', context)
+
+def album(request, id):
+    context = {
+        'images': image_set, #TODO: Rename these
+        'caption': daypage.caption, # TODO: Refactor to be a dict of captions and image indices?
+        'date': date, #TODO: Remove, replace with alternative
+        'date_str': datetime.date.strftime(date, '%m/%d/%y'), #TODO: Also remove
+        'prev_url': prev_url, #TODO: Make optional
+        'next_url': next_url,
+        'month_url': month_url #TODO: Make this more like a "back" url
+    }
+
+    return render(request, 'imgapp/gallery.html', context)
