@@ -126,7 +126,7 @@ def album(request, id):
     context = {
         'image_list': image_set,
         'caption': daypage.caption, # TODO: Refactor to be a dict of captions and image indices?
-        'date': date, #TODO: Remove, replace with alternative
+        'title': "Example Album",
         'date_str': datetime.date.strftime(date, '%m/%d/%y'), #TODO: Also remove
         'prev_url': prev_url, #TODO: Make optional
         'next_url': next_url,
