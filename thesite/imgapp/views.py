@@ -119,8 +119,12 @@ def year(request, year):
     return render(request, 'imgapp/year.html', context)
 
 def album(request, id):
+    date = datetime.date(2023, 3, 15)
+    daypage = get_object_or_404(DayPage, date=date)
+    image_set = daypage.image_set.all()
+
     context = {
-        'images': image_set, #TODO: Rename these
+        'image_list': image_set,
         'caption': daypage.caption, # TODO: Refactor to be a dict of captions and image indices?
         'date': date, #TODO: Remove, replace with alternative
         'date_str': datetime.date.strftime(date, '%m/%d/%y'), #TODO: Also remove
