@@ -128,9 +128,9 @@ def album(request, id):
         'caption': daypage.caption, # TODO: Refactor to be a dict of captions and image indices?
         'title': "Example Album",
         'date_str': datetime.date.strftime(date, '%m/%d/%y'), #TODO: Also remove
-        'prev_url': prev_url, #TODO: Make optional
-        'next_url': next_url,
-        'month_url': month_url #TODO: Make this more like a "back" url
+        'prev_url': None,
+        'next_url': None,
+        'up_url': '/'
     }
 
     return render(request, 'imgapp/gallery.html', context)

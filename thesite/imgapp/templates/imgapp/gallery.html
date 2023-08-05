@@ -15,9 +15,9 @@
     <body style="margin: 0;">
         <!-- Controls -->
         <div class="controls">
-            <a class="left-control" href="{{prev_url}}">&lt;</a> 
-            <a class="up-control" href="{{month_url}}">^</a> 
-            <a class="right-control" href="{{next_url}}">&gt;</a> 
+            {% if prev_url %} <a class="left-control" href="{{prev_url}}">&lt;</a> {% endif %}
+            <a class="up-control" href="{{up_url}}">^</a> 
+            {% if next_url %} <a class="right-control" href="{{next_url}}">&gt;</a> {% endif %}
         </div>
 
         {% include 'imgapp/components/_dark_mode.html' %}
