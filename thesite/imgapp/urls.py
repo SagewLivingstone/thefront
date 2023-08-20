@@ -9,4 +9,5 @@ urlpatterns = [
      path('day/<int:year>/<int:month>/<int:day>/', views.date, name='day'),
      path('month/<int:year>/<int:month>/', views.month, name='month'),
      path('year/<int:year>', views.year, name='year'),
+     path('album/<int:id>', views.album, name='album'),
 ]
