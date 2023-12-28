@@ -119,7 +119,7 @@ def year(request, year):
     return render(request, 'imgapp/year.html', context)
 
 def album(request, id):
-    date = datetime.date(2023, 3, 15)
+    date = datetime.date(2023, 3, id)
     daypage = get_object_or_404(DayPage, date=date)
     image_set = daypage.image_set.all()
 

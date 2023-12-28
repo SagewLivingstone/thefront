@@ -9,3 +9,4 @@
 - Enable over-writing images AWS
 - Create function that goes back and loads metadata for objects that don't have it
 - Switch from AWS -> Wasabi S3 for better pricing
+- Rewrite in Express, .net, or other (some strongly typed language, please.)
