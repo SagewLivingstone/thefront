@@ -33,6 +33,9 @@ DEBUG = config.getboolean('django', 'debug')
 
 ALLOWED_HOSTS = ['.sagelivingst.one', '127.0.0.1']
 
+if DEBUG:
+    ALLOWED_HOSTS.append('localhost')
+
 # Application definition
 
 INSTALLED_APPS = [
