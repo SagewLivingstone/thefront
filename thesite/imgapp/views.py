@@ -1,24 +1,28 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from typing import List, Tuple
 import datetime
 import calendar
 
 from .models import Image, DayPage
 
+
 def index(request):
     return render(request, 'imgapp/home.html', {})
+
 
 def image_list(request):
     images_list = Image.objects.all()
     context = { 'image_list': images_list }
     return render(request, 'imgapp/image_list.html', context)
 
-def image(request, image_id):
+
+def image(request, image_id: int):
     image = Image.objects.get(pk=image_id)
     context = { 'image': image }
     return render(request, 'imgapp/image.html', context)
 
-def date(request, year, month, day):
+
+def date(request, year: int, month: int, day: int):
     date = datetime.date(year, month, day)
     daypage = get_object_or_404(DayPage, date=date)
 
@@ -51,7 +55,8 @@ def date(request, year, month, day):
 
     return render(request, 'imgapp/day.html', context)
 
-def _get_days_list(year, month):
+
+def _get_days_list(year: int, month: int) -> Tuple[List[DayPage], int]:
     """
     Gets the list of DayPages in a month
 
@@ -84,7 +89,8 @@ def _get_days_list(year, month):
         fill_days
     )
 
-def month(request, year, month):
+
+def month(request: object, year: int, month: int):
     days_list, fill_days = _get_days_list(year, month)
 
     context = {
@@ -99,7 +105,8 @@ def month(request, year, month):
 
     return render(request, 'imgapp/month.html', context)
 
-def year(request, year):
+
+def year(request: int, year: int):
     
     months = {}
     for i in range(1, 13):
@@ -118,7 +125,8 @@ def year(request, year):
     }
     return render(request, 'imgapp/year.html', context)
 
-def album(request, id):
+
+def album(request: object, id: int):
     date = datetime.date(2023, 3, id)
     daypage = get_object_or_404(DayPage, date=date)
     image_set = daypage.image_set.all()
