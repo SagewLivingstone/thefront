@@ -19,7 +19,3 @@ def GetExif(image):
     # Flatten result
     exifdict.update(ifddict)
     return exifdict
-
-
-if __name__ == "__main__":
-    GetExif("https://s3.us-west-2.amazonaws.com/img.dump/image/DSC00011.jpg")
