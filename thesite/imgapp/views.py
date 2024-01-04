@@ -3,11 +3,15 @@ from typing import List, Tuple
 import datetime
 import calendar
 
-from .models import Image, DayPage
+from .models import Image, DayPage, Album
 
 
 def index(request):
-    return render(request, 'imgapp/home.html', {})
+    albums = Album.objects.all()
+    context = {
+        'albums': albums
+    }
+    return render(request, 'imgapp/home.html', context)
 
 
 def image_list(request):

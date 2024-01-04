@@ -8,6 +8,7 @@ class Album(models.Model):
     subtitle = models.CharField(max_length=64)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    images = models.ManyToManyField(Image, through='AlbumImage')
 
     def __str__(self):
         return self.title

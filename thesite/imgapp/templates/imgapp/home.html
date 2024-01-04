@@ -20,13 +20,21 @@
     </div>
     <div class="content">
         <a class="album-box" href="/year/2023">
-
             <img class="album-image"
                 src="https://s3.us-west-2.amazonaws.com/img.dump/image/aa5844e8-ae93-4c06-9b9f-7deb189e6dc3_1080.jpg"
                 alt="2023"/>
 
             <h2 class="album-title">2023/</h3>
         </a>
+        {% for album in albums %}
+        <a class="album-box" href="/album/{{ album.id }}">
+            <img class="album-image"
+                src="{{ album.images.first.image_normal.url }}"
+                alt="image"/>
+
+            <h2 class="album-title">{{ album.title }}</h3>
+        </a>
+        {% endfor %}
     </div>
 </body>
 </html>
