@@ -7,6 +7,7 @@ class ImageMetadataAdmin(admin.StackedInline):
     readonly_fields = ['image']
 
 class AlbumImageInline(admin.StackedInline):
+    autocomplete_fields = ['album', 'image']
     model = AlbumImage
     extra = 0
 
@@ -24,6 +25,7 @@ class ImageAdmin(admin.ModelAdmin):
         'width',
         'height'
     ]
+    search_fields = ['description', 'day__date']
     inlines = [ImageMetadataAdmin, AlbumImageInline]
 
 @admin.register(DayPage)
@@ -40,4 +42,5 @@ class DayPageAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
+    search_fields = ['title', 'subtitle']
     inlines = [AlbumImageInline]

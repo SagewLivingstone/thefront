@@ -154,7 +154,13 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return (datetime.strftime(self.day.date, '%m/%d/%y') if self.day else 'DATEERROR') + '\n' + self.description
+        desc = (self.description[:75] + '...') if len(self.description) > 75 else self.description
+        date = datetime.strftime(self.day.date, '%m/%d/%y') if self.day else 'DATEERROR'
+
+        return date + '\n' + desc
+
+    class Meta:
+        ordering = ['-day__date']
 
 
 class ImageMetadata(models.Model):
