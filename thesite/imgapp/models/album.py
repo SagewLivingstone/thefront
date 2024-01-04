@@ -9,12 +9,15 @@ class Album(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
 
 class AlbumImage(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
-    caption = models.TextField()
+    caption = models.TextField(blank=True, null=True)
 
     class PlacementType(models.IntegerChoices):
         AUTO = 0, "auto",
