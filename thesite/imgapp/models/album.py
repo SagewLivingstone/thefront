@@ -19,6 +19,7 @@ class AlbumImage(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
     caption = models.TextField(blank=True, null=True)
+    bottom_caption = models.TextField(blank=True, null=True)
 
     class PlacementType(models.IntegerChoices):
         AUTO = 0, "auto",

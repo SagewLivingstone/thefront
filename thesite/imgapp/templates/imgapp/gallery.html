@@ -28,26 +28,24 @@
                 <h1 id="title"> {{ title }} </h1>
                 {% if subtitle %}<h2 id="subtitle"> {{ subtitle }} </h2>{% endif %}
             </div>
-            {% for image in images %}
+            {% for albimage in images %}
                 <!-- Wide Image -->
-                {% if image.wide %}
+                {% if albimage.image.wide %}
                     <div class="image-block">
                         <div class="image-container">
-                            <img src="{{ image.image.url }}"
-                                alt="Image: [{{image}}]"
-                                style="max-width: 100%;"/>
+                            <img src="{{ albimage.image.image.url }}" alt="Image: [{{albimage.image}}]" style="max-width: 100%;"/>
 
-                            {% comment %} Image Caption {% endcomment %}
+                            {% comment %} Image Details {% endcomment %}
                             <div class="image-details" x-data="{ showDetails: false }"
                                 :style="{ opacity: showDetails ? '0.7' : '' }">
                                 <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
-                                    {{ image.metadata.camera }}<br/>
-                                    {{ image.metadata.lens | default:"--" }}<br/>
-                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
-                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
-                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
-                                    iso {{ image.metadata.iso | default:"???" }}
+                                    {{ albimage.image.metadata.camera }}<br/>
+                                    {{ albimage.image.metadata.lens | default:"--" }}<br/>
+                                    {{ albimage.image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ albimage.image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ albimage.image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ albimage.image.metadata.iso | default:"???" }}
                                 </div>
                                 <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
                                     <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
@@ -55,68 +53,61 @@
                                 </div>
                             </div>
                         </div>
-                        {% if forloop.first %}
-                            <div class="caption">{{ caption | linebreaksbr }}</div>
-                        {% endif %}
+
+                        <div class="caption">{{ albimage.caption | linebreaksbr }}</div>
                     </div>
 
                 <!-- Tall Image -->
                 {% else %}
                     <div class="image-block-tall">
                         <!-- Left Image -->
-                        {% if image.left %}
+                        {% if albimage.image.left %}
                         <div class="image-row">
-                            <img src="{{ image.image_normal.url }}"
-                                alt="Image: [{{image}}]"/>
+                            <img src="{{ albimage.image.image_normal.url }}" alt="Image: [{{albimage.image}}]"/>
 
-                            {% comment %} Image Caption {% endcomment %}
+                            {% comment %} Image Details {% endcomment %}
                             <div class="image-details image-details-left" x-data="{ showDetails: false }"
                                 :style="{ opacity: showDetails ? '0.7' : '' }">
                                 <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
-                                    {{ image.metadata.camera }}<br/>
-                                    {{ image.metadata.lens | default:"--" }}<br/>
-                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
-                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
-                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
-                                    iso {{ image.metadata.iso | default:"???" }}
+                                    {{ albimage.image.metadata.camera }}<br/>
+                                    {{ albimage.image.metadata.lens | default:"--" }}<br/>
+                                    {{ albimage.image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ albimage.image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ albimage.image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ albimage.image.metadata.iso | default:"???" }}
                                 </div>
                                 <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
-                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
+                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ albimage.image.timestamp_str }}</span>
                                     <span style="opacity: 0.2;"> 88  18  88  888  88:88</span>
                                 </div>
                             </div>
 
-                            {% comment %} First image caption {% endcomment %}
-                            <div class="caption-tall caption-right">
-                                {% if forloop.first %} {{ caption | linebreaksbr }} {% endif %}
-                            </div>
+                            <div class="caption-tall caption-right">{{ albimage.caption | linebreaksbr }}</div>
                         </div>
 
                         <!-- Right Image -->
                         {% else %}
                         <div class="image-row">
                             {% comment %} <p class="image-tall-caption">{{image|linebreaksbr}}</p> {% endcomment %}
-                            <div class="caption-tall">
-                                {% if forloop.first %} {{ caption | linebreaksbr }} {% endif %}
-                            </div>
-                            <img src="{{ image.image_normal.url }}"
-                                alt="Image: [{{image}}]"/>
+                            <div class="caption-tall">{{ albimage.caption | linebreaksbr }}</div>
 
-                            {% comment %} Image Caption {% endcomment %}
+                            <img src="{{ albimage.image.image_normal.url }}" alt="Image: [{{albimage.image}}]"/>
+
+                            {% comment %} Image Details {% endcomment %}
                             <div class="image-details image-details-right" x-data="{ showDetails: false }"
                                 :style="{ opacity: showDetails ? '0.7' : '' }">
                                 <div class="image-details-metadata digital-display" x-show="showDetails"
                                     x-cloak @click="showDetails = false">
-                                    {{ image.metadata.camera }}<br/>
-                                    {{ image.metadata.lens | default:"--" }}<br/>
-                                    {{ image.metadata.focallength | default:"???" }}mm<br/>
-                                    f/{{ image.metadata.fnumber | default:"???" }}<br/>
-                                    {{ image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
-                                    iso {{ image.metadata.iso | default:"???" }}
+                                    {{ albimage.image.metadata.camera }}<br/>
+                                    {{ albimage.image.metadata.lens | default:"--" }}<br/>
+                                    {{ albimage.image.metadata.focallength | default:"???" }}mm<br/>
+                                    f/{{ albimage.image.metadata.fnumber | default:"???" }}<br/>
+                                    {{ albimage.image.metadata.shutterspeed_fraction | default:"?/??" }} s<br/>
+                                    iso {{ albimage.image.metadata.iso | default:"???" }}
                                 </div>
                                 <div class="image-timestamp digital-display" x-bind:style="{ 'opacity': showDetails ? 'initial' : '' }">
-                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ image.timestamp_str }}</span>
+                                    <span @click="showDetails = !showDetails" style="z-index: 2;">{{ albimage.image.timestamp_str }}</span>
                                     <span style="opacity: 0.2;"> 88  18  88  888  88:88</span>
                                 </div>
                             </div>

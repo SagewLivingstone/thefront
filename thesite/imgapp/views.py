@@ -133,9 +133,10 @@ def year(request: int, year: int):
 def album(request: object, id: int):
     album = get_object_or_404(Album, id=id)
     image_set = album.images.all()
+    image_relations = album.albumimage_set.all()
 
     context = {
-        'images': image_set,
+        'images': image_relations,
         'caption': "REPLACE THIS", # TODO: Refactor to be a dict of captions and image indices?
         'title': album.title,
         'subtitle': album.subtitle,
