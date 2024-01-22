@@ -10,13 +10,13 @@
         {% load static %}
         <link rel="icon" href="{% static 'favicon4.png' %}" type="image/png">
         <link rel="stylesheet" type="text/css" href="{% static 'imgapp/top.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'imgapp/day.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'imgapp/gallery.css' %}">
     </head>
     <body style="margin: 0;">
         <!-- Controls -->
         <div class="controls">
             {% if prev_url %} <a class="left-control" href="{{prev_url}}">&lt;</a> {% endif %}
-            <a class="up-control" href="{{up_url}}">^</a> 
+            {% if up_url %} <a class="up-control" href="{{up_url}}">^</a> {% endif %}
             {% if next_url %} <a class="right-control" href="{{next_url}}">&gt;</a> {% endif %}
         </div>
 
@@ -24,7 +24,11 @@
 
         <!-- Main -->
         <div class="content">
-            {% for image in image_list %}
+            <div class="title-box">
+                <h1 id="title"> {{ title }} </h1>
+                {% if subtitle %}<h2 id="subtitle"> {{ subtitle }} </h2>{% endif %}
+            </div>
+            {% for image in images %}
                 <!-- Wide Image -->
                 {% if image.wide %}
                     <div class="image-block">

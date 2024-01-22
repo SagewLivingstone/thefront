@@ -53,6 +53,26 @@ html {
     opacity: 100%;
 }
 
+.title-box {
+    padding-top: 20vh;
+    padding-bottom: 30vh;
+    background-color: white;
+}
+
+#title {
+	text-align: center;
+	font-size: 4.5em;
+    margin-top: 0;
+	margin-bottom: 15px;
+}
+
+#subtitle {
+	text-align: center;
+	font-size: 2em;
+	margin-top: 10px;
+    margin-bottom: 0;
+}
+
 @media (max-width: 600px) {
 
     .controls>.left-control,

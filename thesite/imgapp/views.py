@@ -131,14 +131,14 @@ def year(request: int, year: int):
 
 
 def album(request: object, id: int):
-    date = datetime.date(2023, 3, id)
-    daypage = get_object_or_404(DayPage, date=date)
-    image_set = daypage.image_set.all()
+    album = get_object_or_404(Album, id=id)
+    image_set = album.images.all()
 
     context = {
-        'image_list': image_set,
-        'caption': daypage.caption, # TODO: Refactor to be a dict of captions and image indices?
-        'title': "Example Album",
+        'images': image_set,
+        'caption': "REPLACE THIS", # TODO: Refactor to be a dict of captions and image indices?
+        'title': album.title,
+        'subtitle': album.subtitle,
         'prev_url': None,
         'next_url': None,
         'up_url': '/'

@@ -41,6 +41,11 @@ body {
 .caption-tall {
     color: #d4d4d4;
 }
+
+/* Gallery */
+.title-box {
+    background-color: #1d1d1d;
+}
 `;
 
 
