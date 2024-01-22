@@ -30,7 +30,7 @@
             </div>
             {% for albimage in images %}
                 <!-- Wide Image -->
-                {% if albimage.image.wide %}
+                {% if albimage.wide %}
                     <div class="image-block">
                         <div class="image-container">
                             <img src="{{ albimage.image.image.url }}" alt="Image: [{{albimage.image}}]" style="max-width: 100%;"/>
@@ -61,7 +61,7 @@
                 {% else %}
                     <div class="image-block-tall">
                         <!-- Left Image -->
-                        {% if albimage.image.left %}
+                        {% if albimage.placement == "left" %}
                         <div class="image-row">
                             <img src="{{ albimage.image.image_normal.url }}" alt="Image: [{{albimage.image}}]"/>
 

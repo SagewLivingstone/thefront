@@ -9,6 +9,8 @@ class Album(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     images = models.ManyToManyField(Image, through='AlbumImage')
+    auto_left_right = models.BooleanField(default=True)
+    auto_wide_image = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -27,3 +29,4 @@ class AlbumImage(models.Model):
         RIGHT = 2, "right",
         CENTER = 3, "center"
     placement = models.IntegerField(choices=PlacementType.choices, default=PlacementType.AUTO)
+    wide = models.BooleanField(default=False)

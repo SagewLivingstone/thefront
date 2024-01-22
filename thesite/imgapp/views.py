@@ -132,11 +132,21 @@ def year(request: int, year: int):
 
 def album(request: object, id: int):
     album = get_object_or_404(Album, id=id)
-    image_set = album.images.all()
-    image_relations = album.albumimage_set.all()
+    albimages = album.albumimage_set.all()
+
+    counter = 0
+    for albimage in albimages:
+        image = albimage.image
+        image.aspect_ratio = image.width / image.height
+
+        if album.auto_wide_image:
+            albimage.wide = image.aspect_ratio > 1.4
+        if album.auto_left_right and not albimage.wide:
+            albimage.position = "left" if counter % 2 == 0 else "right"
+            counter = counter + 1
 
     context = {
-        'images': image_relations,
+        'images': albimages,
         'caption': "REPLACE THIS", # TODO: Refactor to be a dict of captions and image indices?
         'title': album.title,
         'subtitle': album.subtitle,
